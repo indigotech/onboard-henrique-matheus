@@ -16,6 +16,7 @@ module.exports = {
         'no-shadow': 'off',
         'no-undef': 'off',
         'prettier/prettier': 'error',
+        curly: 'error',
       },
     },
   ],
