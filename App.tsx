@@ -18,9 +18,7 @@ import {
   View,
 } from 'react-native';
 
-import {
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -36,7 +34,7 @@ const App = () => {
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
         <View>
-            <Text>Hello World!</Text>
+          <Text>Hello World!</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
