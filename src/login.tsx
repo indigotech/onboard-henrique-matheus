@@ -92,42 +92,42 @@ const Login = () => {
     validatePassword();
   };
 
-	// this.render () {
-	return (
-		<Background>
-			<MainText>Bem-vind@ à Taqtile!</MainText>
-			<FieldsCell>
-				<View>
-					<SubText>Email</SubText>
-					<TextBox
-						placeholder={'exemple@exemple.com'}
-						onChangeText={(value) => setEmail(value)}
-						defaultvalue={email}
-						status={emailError}
-					/>
-					{emailError === 'empty' ? <ErrorText>Este campo é obrigatório</ErrorText> :
-						emailError === 'structure' ? <ErrorText>Email inválido</ErrorText> : <ErrorText> </ErrorText>
-					}
-				</View>
-				<View>
-					<SubText>Senha</SubText>
-					<TextBox
-						secureTextEntry={true}
-						onChangeText={(value) => setPassword(value)}
-						defaultvalue={password}
-						status={passwordError}
-					/>
-					{passwordError === 'empty' ? <ErrorText>Este campo é obrigatório</ErrorText> :
-						passwordError === 'structure' ? <ErrorText>Senha deve conter letras e números</ErrorText> :
-						passwordError === 'length' ? <ErrorText>Senha deve ter pelo menos 7 caracteres</ErrorText> : <ErrorText> </ErrorText>
-					}
-				</View>
-				<LoginButton>
-					<ButtonText onPress={() => validateLogin()}>Entrar</ButtonText>
-				</LoginButton>
-			</FieldsCell>
-		</Background>
-	);
+  // this.render () {
+  return (
+    <Background>
+      <MainText>Bem-vind@ à Taqtile!</MainText>
+      <FieldsCell>
+        <View>
+          <SubText>Email</SubText>
+          <TextBox
+            placeholder={'exemple@exemple.com'}
+            onChangeText={(value) => setEmail(value)}
+            defaultvalue={email}
+            status={emailError}
+          />
+          {emailError === 'empty' ? <ErrorText>Este campo é obrigatório</ErrorText> :
+            emailError === 'structure' ? <ErrorText>Email inválido</ErrorText> : <ErrorText> </ErrorText>
+          }
+        </View>
+        <View>
+          <SubText>Senha</SubText>
+          <TextBox
+            secureTextEntry={true}
+            onChangeText={(value) => setPassword(value)}
+            defaultvalue={password}
+            status={passwordError}
+          />
+          {passwordError === 'empty' ? <ErrorText>Este campo é obrigatório</ErrorText> :
+            passwordError === 'structure' ? <ErrorText>Senha deve conter letras e números</ErrorText> :
+            passwordError === 'length' ? <ErrorText>Senha deve ter pelo menos 7 caracteres</ErrorText> : <ErrorText> </ErrorText>
+          }
+        </View>
+        <LoginButton>
+          <ButtonText onPress={() => validateLogin()}>Entrar</ButtonText>
+        </LoginButton>
+      </FieldsCell>
+    </Background>
+  );
 };
 
 export default Login;
