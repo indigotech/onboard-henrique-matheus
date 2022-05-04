@@ -70,7 +70,7 @@ const Login = () => {
     return /[1-9]/.test(str);
   }
 
-  const validateElmail = () => {
+  const validateEmail = () => {
     if (email.length === 0){
       setEmailError('empty');
     } else if (email.search('@') === -1){
@@ -98,7 +98,7 @@ const Login = () => {
   };
 
   const validateLogin = () => {
-    validateElmail();
+    validateEmail();
     validatePassword();
   };
 
