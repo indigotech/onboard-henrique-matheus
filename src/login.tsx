@@ -153,7 +153,7 @@ const Login = () => {
 						status={passwordError}
 					/>
 					{passwordError === 'empty' ? <ErrorText>Este campo é obrigatório</ErrorText> :
-						passwordError === 'structure' ? <ErrorText>Senha deve conter letras e numeros</ErrorText> :
+						passwordError === 'structure' ? <ErrorText>Senha deve conter letras e números</ErrorText> :
 						passwordError === 'length' ? <ErrorText>Senha deve ter pelo menos 7 caracteres</ErrorText> : <ErrorText> </ErrorText>
 					}
 				</View>
