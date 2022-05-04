@@ -44,7 +44,17 @@ const ErrorText = styled.Text`
   align-self: center;
 `;
 
+// Types of errors on field validation
 type FieldErrors = 'structure' | 'empty' | 'length';
+
+// Field validation warnings
+const MandatoryFieldWarning = <ErrorText>Este campo é obrigatório</ErrorText>
+const InvalidEmailWarning = <ErrorText>Email inválido</ErrorText>
+const NoErrorText = <ErrorText> </ErrorText>
+const InvalidPasswordWarning = <ErrorText>Senha deve conter letras e números</ErrorText>
+const PasswordlengthWarning = <ErrorText>Senha deve ter pelo menos 7 caracteres</ErrorText>
+
+
 
 const Login = () => {
 
@@ -92,7 +102,6 @@ const Login = () => {
     validatePassword();
   };
 
-  // this.render () {
   return (
     <Background>
       <MainText>Bem-vind@ à Taqtile!</MainText>
@@ -105,8 +114,8 @@ const Login = () => {
             defaultvalue={email}
             status={emailError}
           />
-          {emailError === 'empty' ? <ErrorText>Este campo é obrigatório</ErrorText> :
-            emailError === 'structure' ? <ErrorText>Email inválido</ErrorText> : <ErrorText> </ErrorText>
+          {emailError === 'empty' ? MandatoryFieldWarning :
+            emailError === 'structure' ? InvalidEmailWarning : NoErrorText
           }
         </View>
         <View>
@@ -117,9 +126,9 @@ const Login = () => {
             defaultvalue={password}
             status={passwordError}
           />
-          {passwordError === 'empty' ? <ErrorText>Este campo é obrigatório</ErrorText> :
-            passwordError === 'structure' ? <ErrorText>Senha deve conter letras e números</ErrorText> :
-            passwordError === 'length' ? <ErrorText>Senha deve ter pelo menos 7 caracteres</ErrorText> : <ErrorText> </ErrorText>
+          {passwordError === 'empty' ? MandatoryFieldWarning :
+            passwordError === 'structure' ? InvalidPasswordWarning :
+            passwordError === 'length' ? PasswordlengthWarning: NoErrorText
           }
         </View>
         <LoginButton>
