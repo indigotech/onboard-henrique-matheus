@@ -16,8 +16,8 @@ const PasswordlengthWarning = <ErrorText>Senha deve ter pelo menos 7 caracteres<
 
 const Login = () => {
 
-  const [email, setEmail] = useState<string>('admin@taqtile.com.br');
-  const [password, setPassword] = useState<string>('1234qwer');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [emailError, setEmailError] = useState<FieldErrors>();
   const [passwordError, setPasswordError] = useState<FieldErrors>();
   const [userToken, setUserToken] = useState<any>('');
@@ -68,15 +68,12 @@ const Login = () => {
     const validEmail = validateEmail();
     const validPassword = validatePassword();
     if(validEmail && validPassword){
-      callLogin();
-    }else{
-      setUserToken('erro');
+      callLogin(email, password);
     }
   };
-
+  
   // Define mutation
   const INCREMENT_COUNTER = gql`
-    # Increments a back-end counter and gets its resulting value
     mutation ($email: String!, $password: String!){
       login(data: {email: $email, password: $password}){
         token
@@ -90,11 +87,22 @@ const Login = () => {
 
   const [mutateFunction,  { loading, error }] = useMutation(INCREMENT_COUNTER);
 
-  const callLogin = () => {
-    // const [mutateFunction, { data, loading, error }] = useMutation(INCREMENT_COUNTER);
-    mutateFunction({
-      variables: {email: email, password: password}
-    }).then(resp => setUserToken(resp.data.login.token));
+  const callLogin = (email, password) => {
+    return (
+      mutateFunction({
+        variables: {email: email, password: password}
+      })
+      .then(resp => {
+        if(resp.data == null){
+          setUserToken('Email ou senha inválidos');
+        } else {
+          setUserToken(resp.data.login.token);
+        }
+      })
+      .catch((e) => {
+        setUserToken(e.message);
+      })
+    );
   }
 
   return (
@@ -105,6 +113,7 @@ const Login = () => {
           <SubText>Email</SubText>
           <TextBox
             placeholder={'exemple@exemple.com'}
+            autoCapitalize='none'
             onChangeText={(value) => setEmail(value)}
             defaultvalue={email}
             status={emailError}
@@ -117,6 +126,7 @@ const Login = () => {
           <SubText>Senha</SubText>
           <TextBox
             secureTextEntry={true}
+            autoCapitalize='none'
             onChangeText={(value) => setPassword(value)}
             defaultvalue={password}
             status={passwordError}
@@ -129,7 +139,7 @@ const Login = () => {
         <LoginButton>
           <ButtonText onPress={() => validateLogin()}>Entrar</ButtonText>
         </LoginButton>
-        <SubText>{userToken}</SubText>
+        <ErrorText>{userToken}</ErrorText>
       </FieldsCell>
     </Background>
   );
