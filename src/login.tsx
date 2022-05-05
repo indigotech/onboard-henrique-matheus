@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
 import React, {useState} from 'react';
 import { View } from 'react-native';
-import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from './components/style'
+import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from './components/style';
+import { gql, useMutation } from '@apollo/client';
 
 // Types of errors on field validation
 type FieldErrors = 'structure' | 'empty' | 'length';
@@ -13,7 +14,7 @@ const NoErrorText = <ErrorText> </ErrorText>
 const InvalidPasswordWarning = <ErrorText>Senha deve conter letras e números</ErrorText>
 const PasswordlengthWarning = <ErrorText>Senha deve ter pelo menos 7 caracteres</ErrorText>
 
-const Login = ({client}) => {
+const Login = () => {
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -128,7 +129,7 @@ const Login = ({client}) => {
         <LoginButton>
           <ButtonText onPress={() => validateLogin()}>Entrar</ButtonText>
         </LoginButton>
-        <Text>{userToken}</Text>
+        <SubText>{userToken}</SubText>
       </FieldsCell>
     </Background>
   );

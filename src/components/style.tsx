@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import {TouchableOpacity, Text, View, TextInput} from 'react-native';
 
 export const Background = styled.View`
