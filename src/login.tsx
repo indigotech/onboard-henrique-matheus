@@ -1,48 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React, {useState} from 'react';
-import {TouchableOpacity, Text, View, TextInput} from 'react-native';
-import styled from 'styled-components';
-
-const Background = styled.View`
-  padding: 20px;
-  padding-top: 100px;
-`;
-const FieldsCell = styled.View`
-  padding-top: 100px;
-`;
-const TextBox = styled.TextInput`
-  margin: 10px;
-  padding: 10px;
-  border: 1px;
-  border-radius: 10px;
-  border-color: ${(props) => props.status === undefined ? 'black' : 'red'};
-`;
-const MainText = styled.Text`
-  font-size: 30px;
-  text-align: center;
-  padding: 10px;
-  color: black;
-`;
-const SubText = styled.Text`
-  font-size: 15px;
-  color: grey;
-`;
-const LoginButton = styled.TouchableOpacity`
-  background-color: #6d50f2;
-  padding: 10px;
-  border-radius: 10px;
-  margin-top: 20px;
-`;
-const ButtonText = styled.Text`
-  font-size: 20px;
-  text-align: center;
-  color: white;
-`;
-const ErrorText = styled.Text`
-  font-size: 12px;
-  color: red;
-  align-self: center;
-`;
+import { View } from 'react-native';
+import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from './components/style'
 
 // Types of errors on field validation
 type FieldErrors = 'structure' | 'empty' | 'length';
@@ -53,8 +12,6 @@ const InvalidEmailWarning = <ErrorText>Email inválido</ErrorText>
 const NoErrorText = <ErrorText> </ErrorText>
 const InvalidPasswordWarning = <ErrorText>Senha deve conter letras e números</ErrorText>
 const PasswordlengthWarning = <ErrorText>Senha deve ter pelo menos 7 caracteres</ErrorText>
-
-
 
 const Login = () => {
 
