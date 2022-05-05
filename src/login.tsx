@@ -16,8 +16,8 @@ const PasswordlengthWarning = <ErrorText>Senha deve ter pelo menos 7 caracteres<
 
 const Login = () => {
 
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [email, setEmail] = useState<string>('admin@taqtile.com.br');
+  const [password, setPassword] = useState<string>('1234qwer');
   const [emailError, setEmailError] = useState<FieldErrors>();
   const [passwordError, setPasswordError] = useState<FieldErrors>();
   const [userToken, setUserToken] = useState<any>('');
@@ -38,7 +38,7 @@ const Login = () => {
       return false;
     } else {
       var emailSplited = email.split('@',2);
-      if (!emailSplited[1].endsWith('.com') || emailSplited[1].length <= 4 || emailSplited[0].length === 0 ){
+      if (!(emailSplited[1].endsWith('.com') || emailSplited[1].endsWith('.com.br')) || emailSplited[1].length <= 4 || emailSplited[0].length === 0 ){
         setEmailError('structure');
         return false;
       } else {
@@ -93,7 +93,7 @@ const Login = () => {
   const callLogin = () => {
     // const [mutateFunction, { data, loading, error }] = useMutation(INCREMENT_COUNTER);
     mutateFunction({
-      variables: {email: "admin@taqtile.com.br", password: "1234qwer"}
+      variables: {email: email, password: password}
     }).then(resp => setUserToken(resp.data.login.token));
   }
 
