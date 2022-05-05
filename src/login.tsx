@@ -13,7 +13,7 @@ const NoErrorText = <ErrorText> </ErrorText>
 const InvalidPasswordWarning = <ErrorText>Senha deve conter letras e números</ErrorText>
 const PasswordlengthWarning = <ErrorText>Senha deve ter pelo menos 7 caracteres</ErrorText>
 
-const Login = () => {
+const Login = ({client}) => {
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
