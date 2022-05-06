@@ -1,19 +1,23 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Cache } from "react-native-cache";
 
-const cache = new Cache({
-    namespace: "myapp",
-    policy: {
-        maxEntries: 50000, // if unspecified, it can have unlimited entries
-        stdTTL: 0 // the standard ttl as number in seconds, default: 0 (unlimited)
-    },
-    backend: AsyncStorage
-});
-
-export const saveUserToken = (token: string) => {
-    cache.set("Token", token);
+export const saveUserToken = async (token: string) => {
+    try {
+      await AsyncStorage.setItem(
+        'Token',
+        token
+      );
+    } catch (error) {
+      throw(error);
+    }
 }
 
 export const getUserToken = async () => {
-    return (await cache.get("Token"));
+    try {
+      const value = await AsyncStorage.getItem('Token');
+      if (value !== null) {
+        return(value);
+      }
+    } catch (error) {
+      throw(error);
+    }
 }
