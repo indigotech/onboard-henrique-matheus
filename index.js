@@ -92,7 +92,6 @@ Navigation.registerComponent('Settings', () => SettingsScreen);
 Navigation.registerComponent('Login', () => Login);
 Navigation.registerComponent('Home', () => Home);
 
-
 Navigation.events().registerAppLaunchedListener(async () => {
   Navigation.setRoot({
     root: {
@@ -100,7 +99,12 @@ Navigation.events().registerAppLaunchedListener(async () => {
         children: [
           {
             component: {
-              name: 'Login'
+              name: 'Login',
+              options: {
+                topBar: {
+                  visible: false
+                }
+              }
             }
           }
         ]
