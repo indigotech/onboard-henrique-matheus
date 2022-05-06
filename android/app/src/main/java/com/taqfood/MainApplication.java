@@ -17,10 +17,8 @@ import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.react.NavigationReactNativeHost;
 
 public class MainApplication extends NavigationApplication {
-// public class MainApplication extends NavigationApplication {
 
   private final ReactNativeHost mReactNativeHost =
-      // new NavigationReactNativeHost(this) {
       new NavigationReactNativeHost(this) {
         @Override
         public boolean getUseDeveloperSupport() {
