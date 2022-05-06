@@ -2,9 +2,9 @@
 import React, {useState, useEffect} from 'react';
 import { View } from 'react-native';
 import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from './utils/style';
-import { getUserToken } from './utils/cache';
 import { validateEmail, validatePassword } from './utils/string-validation';
 import { useLogin } from './utils/login-service';
+import { Navigation } from 'react-native-navigation';
 
 // Types of errors on field validation
 type FieldErrors = 'structure' | 'empty' | 'length';
@@ -16,7 +16,7 @@ const NoErrorText = <ErrorText> </ErrorText>
 const InvalidPasswordWarning = <ErrorText>Senha deve conter letras e números</ErrorText>
 const PasswordlengthWarning = <ErrorText>Senha deve ter pelo menos 7 caracteres</ErrorText>
 
-const Login = () => {
+const Login = (props) => {
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -31,6 +31,20 @@ const Login = () => {
     if(validEmail && validPassword){
       login(email, password, setLoginError);
     }
+    // validateEmail();
+    // validatePassword();
+    Navigation.push(props.componentId, {
+      component: {
+        name: 'Home', // Push the screen registered with the 'Settings' key
+        options: { // Optional options object to configure the screen
+          topBar: {
+            title: {
+              text: 'Home' // Set the TopBar title of the new Screen
+            }
+          }
+        }
+      }
+    });
   };
 
   return (
