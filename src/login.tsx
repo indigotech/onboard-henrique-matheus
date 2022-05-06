@@ -21,7 +21,7 @@ const Login = () => {
   const [password, setPassword] = useState<string>('');
   const [emailError, setEmailError] = useState<FieldErrors>();
   const [passwordError, setPasswordError] = useState<FieldErrors>();
-  const [loginError, setLoginError] = useState<any>('');
+  const [loginError, setLoginError] = useState<string>('');
 
   useEffect(() => {
     const getInfo = async () => {
