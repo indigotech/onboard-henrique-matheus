@@ -25,7 +25,7 @@ const Login = () => {
 
   useEffect(() => {
     const getInfo = async () => {
-      console.log("Token saved: "+ await getUserToken());
+      await getUserToken();
     } 
     getInfo();
   });
@@ -106,7 +106,6 @@ const Login = () => {
           saveUserToken('');
         } else {
           setLoginError('');
-          console.log("Token: "+resp.data.login.token);
           saveUserToken(resp.data.login.token);
         }
       })
