@@ -1,8 +1,9 @@
 /* eslint-disable prettier/prettier */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { View } from 'react-native';
 import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from './components/style';
 import { gql, useMutation } from '@apollo/client';
+import { saveUserToken, getUserToken } from './components/cache';
 
 // Types of errors on field validation
 type FieldErrors = 'structure' | 'empty' | 'length';
@@ -20,7 +21,14 @@ const Login = () => {
   const [password, setPassword] = useState<string>('');
   const [emailError, setEmailError] = useState<FieldErrors>();
   const [passwordError, setPasswordError] = useState<FieldErrors>();
-  const [userToken, setUserToken] = useState<any>('');
+  const [loginError, setLoginError] = useState<any>('');
+
+  useEffect(() => {
+    const getInfo = async () => {
+      console.log("Token saved: "+ await getUserToken());
+    } 
+    getInfo();
+  });
 
   function containsAnyLetter(str: string) {
     return /[a-zA-Z]/.test(str);
@@ -94,13 +102,17 @@ const Login = () => {
       })
       .then(resp => {
         if(resp.data == null){
-          setUserToken('Email ou senha inválidos');
+          setLoginError('Email ou senha inválidos');
+          saveUserToken('');
         } else {
-          setUserToken(resp.data.login.token);
+          setLoginError('');
+          console.log("Token: "+resp.data.login.token);
+          saveUserToken(resp.data.login.token);
         }
       })
       .catch((e) => {
-        setUserToken(e.message);
+        setLoginError(e.message);
+        saveUserToken('');
       })
     );
   }
@@ -112,7 +124,7 @@ const Login = () => {
         <View>
           <SubText>Email</SubText>
           <TextBox
-            placeholder={'exemple@exemple.com'}
+            placeholder={'email@exemple.com'}
             autoCapitalize='none'
             onChangeText={(value) => setEmail(value)}
             defaultvalue={email}
@@ -139,7 +151,7 @@ const Login = () => {
         <LoginButton>
           <ButtonText onPress={() => validateLogin()}>Entrar</ButtonText>
         </LoginButton>
-        <ErrorText>{userToken}</ErrorText>
+        <ErrorText>{loginError}</ErrorText>
       </FieldsCell>
     </Background>
   );
