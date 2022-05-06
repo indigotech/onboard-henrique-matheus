@@ -1,9 +1,22 @@
-import { View, Text } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Navigation } from 'react-native-navigation';
 
-export const Home = (props) => {
+const Home = () => {
     return (
-      <View>
-        <Text>Hello React Native Navigation 👋</Text>
+      <View style={styles.root}>
+        <Text>Hello React Native Navigation</Text>
       </View>
     );
   };
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'whitesmoke'
+  }
+});
+
+export default Home;

@@ -2,8 +2,31 @@
  * @format
  */
 
+import {AppRegistry} from 'react-native';
 import Login from './src/login';
+import Home from './src/home';
 import {name as appName} from './src/app.json';
+// import { Navigation } from 'react-native-navigation';
+
+// AppRegistry.registerComponent(appName, () => Login);
+// AppRegistry.registerComponent('Home', () => Home);
+
+// Navigation.events().registerAppLaunchedListener(async () => {
+//     Navigation.setRoot({
+//       root: {
+//         stack: {
+//           children: [
+//             {
+//               component: {
+//                 name: appName
+//               }
+//             }
+//           ]
+//         }
+//       }
+//     });
+//   });
+
 import React from 'react';
 import { Navigation } from 'react-native-navigation';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
@@ -19,9 +42,6 @@ const App = () => (
     <Login client={client}/>
   </ApolloProvider>
 );
-
-Navigation.registerComponent('TaqFood', () => HomeScreen);
-Navigation.registerComponent('Settings', () => SettingsScreen);
 
 // Home screen declaration
 const HomeScreen = (props) => {
@@ -67,6 +87,12 @@ const SettingsScreen = () => {
   );
 }
 
+// Navigation.registerComponent('Home', () => HomeScreen);
+Navigation.registerComponent('Settings', () => SettingsScreen);
+Navigation.registerComponent('Login', () => Login);
+Navigation.registerComponent('Home', () => Home);
+
+
 Navigation.events().registerAppLaunchedListener(async () => {
   Navigation.setRoot({
     root: {
@@ -74,7 +100,7 @@ Navigation.events().registerAppLaunchedListener(async () => {
         children: [
           {
             component: {
-              name: 'Home'
+              name: 'Login'
             }
           }
         ]

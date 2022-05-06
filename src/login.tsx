@@ -35,11 +35,11 @@ const Login = (props) => {
     // validatePassword();
     Navigation.push(props.componentId, {
       component: {
-        name: 'Home', // Push the screen registered with the 'Settings' key
-        options: { // Optional options object to configure the screen
+        name: 'Home',
+        options: {
           topBar: {
             title: {
-              text: 'Home' // Set the TopBar title of the new Screen
+              text: 'Home'
             }
           }
         }
