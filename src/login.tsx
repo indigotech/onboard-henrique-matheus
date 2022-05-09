@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from './utils/style';
 import { validateEmail, validatePassword } from './utils/string-validation';
 import { useLogin } from './utils/login-service';
+import { LoadingLayer } from './components/loading-layer';
 
 type FieldErrors = 'structure' | 'empty' | 'length';
 
@@ -32,41 +33,44 @@ export const LoginPage = (props) => {
   };
 
   return (
-    <Background>
-      <MainText>Bem-vind@ à Taqtile!</MainText>
-      <FieldsCell>
-        <View>
-          <SubText>Email</SubText>
-          <TextBox
-            placeholder={'email@exemple.com'}
-            autoCapitalize='none'
-            onChangeText={(value) => setEmail(value)}
-            defaultvalue={email}
-            status={emailError}
-          />
-          {emailError === 'empty' ? MandatoryFieldWarning :
-            emailError === 'structure' ? InvalidEmailWarning : NoErrorText
-          }
-        </View>
-        <View>
-          <SubText>Senha</SubText>
-          <TextBox
-            secureTextEntry={true}
-            autoCapitalize='none'
-            onChangeText={(value) => setPassword(value)}
-            defaultvalue={password}
-            status={passwordError}
-          />
-          {passwordError === 'empty' ? MandatoryFieldWarning :
-            passwordError === 'structure' ? InvalidPasswordWarning :
-            passwordError === 'length' ? PasswordlengthWarning: NoErrorText
-          }
-        </View>
-        <LoginButton>
-          <ButtonText onPress={() => validateLogin()}>Entrar</ButtonText>
-        </LoginButton>
-        <ErrorText>{loginError}</ErrorText>
-      </FieldsCell>
-    </Background>
+    <View>
+      <Background>
+        <MainText>Bem-vind@ à Taqtile!</MainText>
+        <FieldsCell>
+          <View>
+            <SubText>Email</SubText>
+            <TextBox
+              placeholder={'email@exemple.com'}
+              autoCapitalize='none'
+              onChangeText={(value) => setEmail(value)}
+              defaultvalue={email}
+              status={emailError}
+            />
+            {emailError === 'empty' ? MandatoryFieldWarning :
+              emailError === 'structure' ? InvalidEmailWarning : NoErrorText
+            }
+          </View>
+          <View>
+            <SubText>Senha</SubText>
+            <TextBox
+              secureTextEntry={true}
+              autoCapitalize='none'
+              onChangeText={(value) => setPassword(value)}
+              defaultvalue={password}
+              status={passwordError}
+            />
+            {passwordError === 'empty' ? MandatoryFieldWarning :
+              passwordError === 'structure' ? InvalidPasswordWarning :
+              passwordError === 'length' ? PasswordlengthWarning: NoErrorText
+            }
+          </View>
+          <LoginButton>
+            <ButtonText onPress={() => validateLogin()}>Entrar</ButtonText>
+          </LoginButton>
+          <ErrorText>{loginError}</ErrorText>
+        </FieldsCell>
+      </Background>
+      {Loading ? <LoadingLayer/> : <></>}
+    </View>
   );
 };
