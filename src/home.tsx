@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Navigation } from 'react-native-navigation';
 import { getUserToken } from './components/cache';
 
-const Home = () => {
+export const HomePage = () => {
 
   const [token, setToken] = useState('');
   useEffect(() => {
-    const getInfo = async () => {
+    const loadUserToken = async () => {
       setToken(await getUserToken());
     } 
-    getInfo();
+    loadUserToken();
   });
 
   return (
@@ -28,5 +27,3 @@ const styles = StyleSheet.create({
     backgroundColor: 'whitesmoke'
   }
 });
-
-export default Home;

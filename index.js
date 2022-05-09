@@ -2,8 +2,8 @@
  * @format
  */
 
-import Login from './src/login';
-import Home from './src/home';
+import LoginPage from './src/login';
+import HomePage from './src/home';
 import {name as appName} from './src/app.json';
 import React from 'react';
 import { View } from 'react-native';
@@ -26,10 +26,7 @@ class RenderComponent extends React.Component {
   }
 }
 
-function encapsulateComponent(Component) {
-  const myRender = () => (
-    <Component {...this.props} client={client} />
-  );
+function withApollo(Component) {
   return class extends React.Component {
     render() {
       return (
@@ -43,8 +40,8 @@ function encapsulateComponent(Component) {
   }
 }
 
-Navigation.registerComponent('Login', () => encapsulateComponent(Login));
-Navigation.registerComponent('Home', () => encapsulateComponent(Home));
+Navigation.registerComponent('Login', () => withApollo(LoginPage));
+Navigation.registerComponent('Home', () => withApollo(HomePage));
 
 Navigation.events().registerAppLaunchedListener(async () => {
   Navigation.setRoot({

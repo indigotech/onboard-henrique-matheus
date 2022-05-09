@@ -15,7 +15,7 @@ const NoErrorText = <ErrorText> </ErrorText>
 const InvalidPasswordWarning = <ErrorText>Senha deve conter letras e números</ErrorText>
 const PasswordlengthWarning = <ErrorText>Senha deve ter pelo menos 7 caracteres</ErrorText>
 
-const Login = (props) => {
+export const LoginPage = (props) => {
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -74,5 +74,3 @@ const Login = (props) => {
     </Background>
   );
 };
-
-export default Login;
