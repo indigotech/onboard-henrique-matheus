@@ -24,7 +24,7 @@ export const useLogin = () => {
         variables: {email: email, password: password}
       })
       .then(resp => {
-        if(resp.data == null){
+        if(!resp.data){
           setLoginError('Email ou senha inválidos');
           saveUserToken('');
         } else {
@@ -34,7 +34,7 @@ export const useLogin = () => {
         }
       })
       .catch((e) => {
-        setLoginError(e.message);
+        setLoginError(e.graphQLErrors[0].message);
         saveUserToken('');
       })
     );

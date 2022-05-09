@@ -25,13 +25,6 @@ const Login = () => {
   const [loginError, setLoginError] = useState<string>('');
   const { login } = useLogin();
 
-  useEffect(() => {
-    const getInfo = async () => {
-      await getUserToken();
-    } 
-    getInfo();
-  });
-
   const validateLogin = () => {
     const validEmail = validateEmail(email, setEmailError);
     const validPassword = validatePassword(password, setPasswordError);
