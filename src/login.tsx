@@ -29,20 +29,6 @@ export const LoginPage = (props) => {
     if(validEmail && validPassword){
       login(email, password, setLoginError, props.componentId);
     }
-    // validateEmail();
-    // validatePassword();
-    Navigation.push(props.componentId, {
-      component: {
-        name: 'Home', // Push the screen registered with the 'Settings' key
-        options: { // Optional options object to configure the screen
-          topBar: {
-            title: {
-              text: 'Home' // Set the TopBar title of the new Screen
-            }
-          }
-        }
-      }
-    });
   };
 
   return (
