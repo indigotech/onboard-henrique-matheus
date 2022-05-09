@@ -16,14 +16,12 @@ const Home = () => {
   return (
     <View style={styles.root}>
       <Text>Hello React Native Navigation</Text>
-      <Text>Yourt token: {token}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   root: {
-    // flex: 1,
     height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
