@@ -1,5 +1,6 @@
 import { gql, useMutation } from '@apollo/client';
 import { saveUserToken } from './cache';
+import { Navigation } from 'react-native-navigation';
 
 export const useLogin = () => {
 
@@ -30,7 +31,18 @@ export const useLogin = () => {
         } else {
           setLoginError('');
           saveUserToken(resp.data.login.token);
-        console.log(resp.data.login.token)
+          Navigation.push(props.componentId, {
+            component: {
+              name: 'Home',
+              options: {
+                topBar: {
+                  title: {
+                    text: 'Home'
+                  }
+                }
+              }
+            }
+          });
         }
       })
       .catch((e) => {

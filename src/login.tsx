@@ -4,7 +4,6 @@ import { View } from 'react-native';
 import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from './utils/style';
 import { validateEmail, validatePassword } from './utils/string-validation';
 import { useLogin } from './utils/login-service';
-import { Navigation } from 'react-native-navigation';
 
 // Types of errors on field validation
 type FieldErrors = 'structure' | 'empty' | 'length';
@@ -26,6 +25,7 @@ const Login = (props) => {
   const { login } = useLogin();
 
   const validateLogin = () => {
+    setLoginError('');
     const validEmail = validateEmail(email, setEmailError);
     const validPassword = validatePassword(password, setPasswordError);
     if(validEmail && validPassword){
@@ -33,18 +33,6 @@ const Login = (props) => {
     }
     // validateEmail();
     // validatePassword();
-    Navigation.push(props.componentId, {
-      component: {
-        name: 'Home',
-        options: {
-          topBar: {
-            title: {
-              text: 'Home'
-            }
-          }
-        }
-      }
-    });
   };
 
   return (
