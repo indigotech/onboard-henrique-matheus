@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
 import React, {useState, useEffect} from 'react';
 import { View } from 'react-native';
-import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from './components/style';
-import { gql, useMutation } from '@apollo/client';
-import { saveUserToken, getUserToken } from './components/cache';
+import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from './utils/style';
+import { getUserToken } from './utils/cache';
+import { validateEmail, validatePassword } from './utils/string-validation';
+import { useLogin } from './utils/login-service';
 
 // Types of errors on field validation
 type FieldErrors = 'structure' | 'empty' | 'length';
@@ -22,6 +23,7 @@ const Login = () => {
   const [emailError, setEmailError] = useState<FieldErrors>();
   const [passwordError, setPasswordError] = useState<FieldErrors>();
   const [loginError, setLoginError] = useState<string>('');
+  const { login } = useLogin();
 
   useEffect(() => {
     const getInfo = async () => {
@@ -30,91 +32,13 @@ const Login = () => {
     getInfo();
   });
 
-  function containsAnyLetter(str: string) {
-    return /[a-zA-Z]/.test(str);
-  }
-  function containsAnyDigit(str: string) {
-    return /[1-9]/.test(str);
-  }
-
-  const validateEmail = () => {
-    if (email.length === 0){
-      setEmailError('empty');
-      return false;
-    } else if (email.search('@') === -1){
-      setEmailError('structure');
-      return false;
-    } else {
-      var emailSplited = email.split('@',2);
-      if (!(emailSplited[1].endsWith('.com') || emailSplited[1].endsWith('.com.br')) || emailSplited[1].length <= 4 || emailSplited[0].length === 0 ){
-        setEmailError('structure');
-        return false;
-      } else {
-        setEmailError(undefined);
-        return true;
-      }
-    }
-  };
-
-  const validatePassword = () => {
-    if (password.length === 0){
-      setPasswordError('empty');
-      return false;
-    } else if (password.length < 7){
-      setPasswordError('length');
-      return false;
-    } else if (containsAnyLetter(password) && containsAnyDigit(password)){
-      setPasswordError(undefined);
-      return true;
-    } else {
-      setPasswordError('structure');
-      return false;
-    } 
-  };
-
   const validateLogin = () => {
-    const validEmail = validateEmail();
-    const validPassword = validatePassword();
+    const validEmail = validateEmail(email, setEmailError);
+    const validPassword = validatePassword(password, setPasswordError);
     if(validEmail && validPassword){
-      callLogin(email, password);
+      login(email, password, setLoginError);
     }
   };
-  
-  // Define mutation
-  const INCREMENT_COUNTER = gql`
-    mutation ($email: String!, $password: String!){
-      login(data: {email: $email, password: $password}){
-        token
-        user{
-          id
-          name
-        }
-      }
-    }
-  `;
-
-  const [mutateFunction,  { loading, error }] = useMutation(INCREMENT_COUNTER);
-
-  const callLogin = (email, password) => {
-    return (
-      mutateFunction({
-        variables: {email: email, password: password}
-      })
-      .then(resp => {
-        if(resp.data == null){
-          setLoginError('Email ou senha inválidos');
-          saveUserToken('');
-        } else {
-          setLoginError('');
-          saveUserToken(resp.data.login.token);
-        }
-      })
-      .catch((e) => {
-        setLoginError(e.message);
-        saveUserToken('');
-      })
-    );
-  }
 
   return (
     <Background>
