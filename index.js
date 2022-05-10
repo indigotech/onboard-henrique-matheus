@@ -12,7 +12,6 @@ const client = new ApolloClient({
   uri: 'https://tq-template-server-sample.herokuapp.com/graphql',
   cache: new InMemoryCache()
 });
-
 Navigation.registerComponent('Login', () => (props) =>
   <ApolloProvider client={client}>
     <LoginPage {...props} />
@@ -33,7 +32,7 @@ Navigation.events().registerAppLaunchedListener(async () => {
         children: [
           {
             component: {
-              name: 'Home',
+              name: 'Login',
               options: {
                 topBar: {
                   visible: false

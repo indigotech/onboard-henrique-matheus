@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, SafeAreaViewBase, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, FlatList, SafeAreaView } from 'react-native';
 import { ClientCard } from './components/client-card';
 import { getUserToken } from './utils/cache';
 import { MainContainer } from './utils/style';
 import { useUserList } from './utils/user-service';
-import { isTypeSystemDefinitionNode } from 'graphql';
 import styled from 'styled-components/native';
 
 export const HomePage = (props) => {
@@ -72,7 +71,7 @@ export const HomePage = (props) => {
         <FlatList
           data={clientList}
           renderItem={({ item }) => (
-            <ClientCard client={item}/>
+            <ClientCard key={item.id} client={item}/>
           )}
         />
       }
