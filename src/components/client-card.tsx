@@ -13,7 +13,7 @@ const ClientContainer = styled.View`
 `;
 
 export const ClientCard = ({ client }) => {
-    return(
+    return (
         <ClientContainer>
             <Text>{client.name}</Text>
             <Text>{client.email}</Text>

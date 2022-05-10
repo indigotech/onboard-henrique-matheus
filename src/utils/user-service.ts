@@ -12,19 +12,13 @@ const GET_CLIENTS_LIST = gql`
   }
 `;
 
-export const useClient = (token) => {
+export const useUserList = (token) => {
 
   const resp = useQuery(GET_CLIENTS_LIST, {
     context: {
       headers: {
         "Authorization": token
       } 
-    },
-    onCompleted: (data) => {
-      console.log("onComplited:",data.users.nodes);
-    },
-    onError: (error) => {
-      console.log('onError:',error.message);
     },
     pollInterval: 500,
   });
