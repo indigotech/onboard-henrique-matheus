@@ -19,7 +19,7 @@ export const useLogin = () => {
 
   const [mutateFunction,  { loading, error }] = useMutation(LOGIN);
 
-  const login = (email, password, setLoginError) => {
+  const login = (email, password, setLoginError, componentID) => {
     return (
       mutateFunction({
         variables: {email: email, password: password}
@@ -31,7 +31,7 @@ export const useLogin = () => {
         } else {
           setLoginError('');
           saveUserToken(resp.data.login.token);
-          Navigation.push(props.componentId, {
+          Navigation.push(componentID, {
             component: {
               name: 'Home',
               options: {

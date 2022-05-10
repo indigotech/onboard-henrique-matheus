@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { getUserToken } from './components/cache';
+import { getUserToken } from './utils/cache';
 
 export const HomePage = () => {
 

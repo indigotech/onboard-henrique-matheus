@@ -29,7 +29,7 @@ export const LoginPage = (props) => {
     const validEmail = validateEmail(email, setEmailError);
     const validPassword = validatePassword(password, setPasswordError);
     if(validEmail && validPassword){
-      login(email, password, setLoginError);
+      login(email, password, setLoginError, props.componentId);
     }
     // validateEmail();
     // validatePassword();

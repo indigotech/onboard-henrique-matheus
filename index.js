@@ -2,8 +2,8 @@
  * @format
  */
 
-import LoginPage from './src/login';
-import HomePage from './src/home';
+import { LoginPage } from './src/login';
+import { HomePage } from './src/home';
 import {name as appName} from './src/app.json';
 import React from 'react';
 import { View } from 'react-native';
