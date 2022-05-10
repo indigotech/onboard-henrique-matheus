@@ -10,7 +10,6 @@ import { View } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
-// Initialize Apollo Client
 const client = new ApolloClient({
   uri: 'https://tq-template-server-sample.herokuapp.com/graphql',
   cache: new InMemoryCache()
