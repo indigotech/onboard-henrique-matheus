@@ -45,9 +45,11 @@ export const LoginPage = (props) => {
               defaultvalue={email}
               status={emailError}
             />
-            { emailError === FieldErrors.empty && MandatoryFieldWarning }
-            { emailError === FieldErrors.structure && InvalidEmailWarning }
-            { !emailError && NoErrorText }
+            <ErrorText>
+              { emailError === FieldErrors.empty && "Este campo é obrigatório" }
+              { emailError === FieldErrors.structure && "Email inválido" }
+              { !emailError && " " }
+            </ErrorText>
           </View>
           <View>
             <SubText>Senha</SubText>
@@ -58,10 +60,12 @@ export const LoginPage = (props) => {
               defaultvalue={password}
               status={passwordError}
             />
-            { passwordError === FieldErrors.empty && MandatoryFieldWarning }
-            { passwordError === FieldErrors.structure && InvalidPasswordWarning }
-            { passwordError === FieldErrors.length && PasswordlengthWarning }
-            { !passwordError && NoErrorText }
+            <ErrorText>
+              { passwordError === FieldErrors.empty && "Este campo é obrigatório" }
+              { passwordError === FieldErrors.structure && "Senha deve conter letras e números" }
+              { passwordError === FieldErrors.length && "Senha deve ter pelo menos 7 caracteres" }
+              { !passwordError && " " }
+            </ErrorText>
           </View>
           <LoginButton>
             <ButtonText onPress={() => validateLogin()}>Entrar</ButtonText>
