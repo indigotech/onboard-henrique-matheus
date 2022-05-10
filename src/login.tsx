@@ -5,8 +5,7 @@ import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, Login
 import { validateEmail, validatePassword } from './utils/string-validation';
 import { useLogin } from './utils/login-service';
 import { LoadingLayer } from './components/loading-layer';
-
-type FieldErrors = 'structure' | 'empty' | 'length';
+import { FieldErrors} from './utils/errors';
 
 const MandatoryFieldWarning = <ErrorText>Este campo é obrigatório</ErrorText>
 const InvalidEmailWarning = <ErrorText>Email inválido</ErrorText>
@@ -42,26 +41,26 @@ export const LoginPage = (props) => {
             <TextBox
               placeholder={'email@exemple.com'}
               autoCapitalize='none'
-              onChangeText={(value) => setEmail(value)}
+              onChangeText={setEmail}
               defaultvalue={email}
               status={emailError}
             />
-            { emailError === 'empty' && MandatoryFieldWarning }
-            { emailError === 'structure' && InvalidEmailWarning }
+            { emailError === FieldErrors.empty && MandatoryFieldWarning }
+            { emailError === FieldErrors.structure && InvalidEmailWarning }
             { !emailError && NoErrorText }
           </View>
           <View>
             <SubText>Senha</SubText>
             <TextBox
-              secureTextEntry={true}
+              secureTextEntry
               autoCapitalize='none'
-              onChangeText={(value) => setPassword(value)}
+              onChangeText={setPassword}
               defaultvalue={password}
               status={passwordError}
             />
-            { passwordError === 'empty' && MandatoryFieldWarning }
-            { passwordError === 'structure' && InvalidPasswordWarning }
-            { passwordError === 'length' && PasswordlengthWarning }
+            { passwordError === FieldErrors.empty && MandatoryFieldWarning }
+            { passwordError === FieldErrors.structure && InvalidPasswordWarning }
+            { passwordError === FieldErrors.length && PasswordlengthWarning }
             { !passwordError && NoErrorText }
           </View>
           <LoginButton>
