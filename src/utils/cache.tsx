@@ -15,9 +15,9 @@ export const getUserToken = async () => {
     try {
       const value = await AsyncStorage.getItem('Token');
       if (value !== null) {
-        return(value);
+        return value;
       }
     } catch (error) {
-      throw(error);
+      throw error;
     }
 }
