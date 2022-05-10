@@ -21,7 +21,7 @@ export const LoginPage = (props) => {
   const [emailError, setEmailError] = useState<FieldErrors>();
   const [passwordError, setPasswordError] = useState<FieldErrors>();
   const [loginError, setLoginError] = useState<string>('');
-  const { login } = useLogin();
+  const { login, loading } = useLogin();
 
   const validateLogin = () => {
     setLoginError('');
@@ -70,7 +70,7 @@ export const LoginPage = (props) => {
           <ErrorText>{loginError}</ErrorText>
         </FieldsCell>
       </Background>
-      {Loading ? <LoadingLayer/> : <></>}
+      {loading ? <LoadingLayer/> : <></>}
     </View>
   );
 };
