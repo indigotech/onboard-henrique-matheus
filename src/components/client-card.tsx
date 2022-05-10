@@ -7,8 +7,8 @@ const ClientContainer = styled.View`
     border-radius: 5px;
     align-text: left;
     background: lightgrey;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
     margin-top: 5px;
 `;
 
