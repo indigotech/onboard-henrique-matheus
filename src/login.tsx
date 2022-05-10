@@ -46,9 +46,9 @@ export const LoginPage = (props) => {
               defaultvalue={email}
               status={emailError}
             />
-            {emailError === 'empty' ? MandatoryFieldWarning :
-              emailError === 'structure' ? InvalidEmailWarning : NoErrorText
-            }
+            { emailError === 'empty' && MandatoryFieldWarning }
+            { emailError === 'structure' && InvalidEmailWarning }
+            { !emailError && NoErrorText }
           </View>
           <View>
             <SubText>Senha</SubText>
@@ -59,10 +59,10 @@ export const LoginPage = (props) => {
               defaultvalue={password}
               status={passwordError}
             />
-            {passwordError === 'empty' ? MandatoryFieldWarning :
-              passwordError === 'structure' ? InvalidPasswordWarning :
-              passwordError === 'length' ? PasswordlengthWarning: NoErrorText
-            }
+            { passwordError === 'empty' && MandatoryFieldWarning }
+            { passwordError === 'structure' && InvalidPasswordWarning }
+            { passwordError === 'length' && PasswordlengthWarning }
+            { !passwordError && NoErrorText }
           </View>
           <LoginButton>
             <ButtonText onPress={() => validateLogin()}>Entrar</ButtonText>
@@ -70,7 +70,7 @@ export const LoginPage = (props) => {
           <ErrorText>{loginError}</ErrorText>
         </FieldsCell>
       </Background>
-      {loading ? <LoadingLayer text={"Realizando Login..."}/> : <></>}
+      {loading && <LoadingLayer text={"Realizando Login..."}/>}
     </View>
   );
 };
