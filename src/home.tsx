@@ -71,7 +71,7 @@ export const HomePage = (props) => {
         <FlatList
           data={clientList}
           renderItem={({ item }) => (
-            <ClientCard key={item.id} client={item}/>
+            <ClientCard client={item}/>
           )}
         />
       }

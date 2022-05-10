@@ -1,4 +1,4 @@
-import { gql, useQuery, useLazyQuery } from '@apollo/client';
+import { gql, useLazyQuery } from '@apollo/client';
 
 const GET_CLIENTS_LIST = gql`
   query{
