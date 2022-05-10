@@ -5,10 +5,8 @@ import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, Login
 import { validateEmail, validatePassword } from './utils/string-validation';
 import { useLogin } from './utils/login-service';
 
-// Types of errors on field validation
 type FieldErrors = 'structure' | 'empty' | 'length';
 
-// Field validation warnings
 const MandatoryFieldWarning = <ErrorText>Este campo é obrigatório</ErrorText>
 const InvalidEmailWarning = <ErrorText>Email inválido</ErrorText>
 const NoErrorText = <ErrorText> </ErrorText>
@@ -31,8 +29,6 @@ export const LoginPage = (props) => {
     if(validEmail && validPassword){
       login(email, password, setLoginError, props.componentId);
     }
-    // validateEmail();
-    // validatePassword();
   };
 
   return (
