@@ -1,10 +1,11 @@
+import { printIntrospectionSchema } from 'graphql';
 import React from 'react';
 import { LoadingBackground, LoadingText } from "../utils/style"
 
-export const LoadingLayer = () => {
+export const LoadingLayer = (props) => {
     return(
       <LoadingBackground>
-        <LoadingText>Realizando login...</LoadingText>
+        <LoadingText>{props.text}</LoadingText>
       </LoadingBackground>
     )
   }

@@ -70,7 +70,7 @@ export const LoginPage = (props) => {
           <ErrorText>{loginError}</ErrorText>
         </FieldsCell>
       </Background>
-      {loading ? <LoadingLayer/> : <></>}
+      {loading ? <LoadingLayer text={"Realizando Login..."}/> : <></>}
     </View>
   );
 };
