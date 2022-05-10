@@ -1,7 +1,10 @@
 /* eslint-disable prettier/prettier */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { View } from 'react-native';
-import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from './components/style'
+import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from './utils/style';
+import { getUserToken } from './utils/cache';
+import { validateEmail, validatePassword } from './utils/string-validation';
+import { useLogin } from './utils/login-service';
 
 // Types of errors on field validation
 type FieldErrors = 'structure' | 'empty' | 'length';
@@ -19,44 +22,15 @@ const Login = () => {
   const [password, setPassword] = useState<string>('');
   const [emailError, setEmailError] = useState<FieldErrors>();
   const [passwordError, setPasswordError] = useState<FieldErrors>();
-
-  function containsAnyLetter(str: string) {
-    return /[a-zA-Z]/.test(str);
-  }
-  function containsAnyDigit(str: string) {
-    return /[1-9]/.test(str);
-  }
-
-  const validateEmail = () => {
-    if (email.length === 0){
-      setEmailError('empty');
-    } else if (email.search('@') === -1){
-      setEmailError('structure');
-    } else {
-      var emailSplited = email.split('@',2);
-      if (!emailSplited[1].endsWith('.com') || emailSplited[1].length <= 4 || emailSplited[0].length === 0 ){
-        setEmailError('structure');
-      } else {
-        setEmailError(undefined);
-      }
-    }
-  };
-
-  const validatePassword = () => {
-    if (password.length === 0){
-      setPasswordError('empty');
-    } else if (password.length < 7){
-      setPasswordError('length');
-    } else if (containsAnyLetter(password) && containsAnyDigit(password)){
-      setPasswordError(undefined);
-    } else {
-      setPasswordError('structure');
-    } 
-  };
+  const [loginError, setLoginError] = useState<string>('');
+  const { login } = useLogin();
 
   const validateLogin = () => {
-    validateEmail();
-    validatePassword();
+    const validEmail = validateEmail(email, setEmailError);
+    const validPassword = validatePassword(password, setPasswordError);
+    if(validEmail && validPassword){
+      login(email, password, setLoginError);
+    }
   };
 
   return (
@@ -66,7 +40,8 @@ const Login = () => {
         <View>
           <SubText>Email</SubText>
           <TextBox
-            placeholder={'exemple@exemple.com'}
+            placeholder={'email@exemple.com'}
+            autoCapitalize='none'
             onChangeText={(value) => setEmail(value)}
             defaultvalue={email}
             status={emailError}
@@ -79,6 +54,7 @@ const Login = () => {
           <SubText>Senha</SubText>
           <TextBox
             secureTextEntry={true}
+            autoCapitalize='none'
             onChangeText={(value) => setPassword(value)}
             defaultvalue={password}
             status={passwordError}
@@ -91,6 +67,7 @@ const Login = () => {
         <LoginButton>
           <ButtonText onPress={() => validateLogin()}>Entrar</ButtonText>
         </LoginButton>
+        <ErrorText>{loginError}</ErrorText>
       </FieldsCell>
     </Background>
   );
