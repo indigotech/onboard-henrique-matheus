@@ -49,7 +49,7 @@ Navigation.events().registerAppLaunchedListener(async () => {
         children: [
           {
             component: {
-              name: 'Login',
+              name: 'Home',
               options: {
                 topBar: {
                   visible: false

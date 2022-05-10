@@ -1,8 +1,10 @@
 import styled from 'styled-components/native';
 import {TouchableOpacity, Text, View, TextInput, Dimensions} from 'react-native';
-
 const WindowHeight = Dimensions.get("screen").height;
 
+export const MainContainer = styled.View`
+padding: 10px;
+`;
 export const Background = styled.View`
   padding: 20px;
   padding-top: 100px;
