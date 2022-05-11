@@ -4,8 +4,8 @@ import { View } from 'react-native';
 import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from './utils/style';
 import { validateEmail, validatePassword } from './utils/string-validation';
 import { useLogin } from './utils/login-service';
-
-type FieldErrors = 'structure' | 'empty' | 'length';
+import { LoadingLayer } from './components/loading-layer';
+import { FieldErrors} from './utils/errors';
 
 const MandatoryFieldWarning = <ErrorText>Este campo é obrigatório</ErrorText>
 const InvalidEmailWarning = <ErrorText>Email inválido</ErrorText>
@@ -20,7 +20,7 @@ export const LoginPage = (props) => {
   const [emailError, setEmailError] = useState<FieldErrors>();
   const [passwordError, setPasswordError] = useState<FieldErrors>();
   const [loginError, setLoginError] = useState<string>('');
-  const { login } = useLogin();
+  const { login, loading } = useLogin();
 
   const validateLogin = () => {
     setLoginError('');
@@ -32,41 +32,48 @@ export const LoginPage = (props) => {
   };
 
   return (
-    <Background>
-      <MainText>Bem-vind@ à Taqtile!</MainText>
-      <FieldsCell>
-        <View>
-          <SubText>Email</SubText>
-          <TextBox
-            placeholder={'email@exemple.com'}
-            autoCapitalize='none'
-            onChangeText={(value) => setEmail(value)}
-            defaultvalue={email}
-            status={emailError}
-          />
-          {emailError === 'empty' ? MandatoryFieldWarning :
-            emailError === 'structure' ? InvalidEmailWarning : NoErrorText
-          }
-        </View>
-        <View>
-          <SubText>Senha</SubText>
-          <TextBox
-            secureTextEntry={true}
-            autoCapitalize='none'
-            onChangeText={(value) => setPassword(value)}
-            defaultvalue={password}
-            status={passwordError}
-          />
-          {passwordError === 'empty' ? MandatoryFieldWarning :
-            passwordError === 'structure' ? InvalidPasswordWarning :
-            passwordError === 'length' ? PasswordlengthWarning: NoErrorText
-          }
-        </View>
-        <LoginButton>
-          <ButtonText onPress={() => validateLogin()}>Entrar</ButtonText>
-        </LoginButton>
-        <ErrorText>{loginError}</ErrorText>
-      </FieldsCell>
-    </Background>
+    <View>
+      <Background>
+        <MainText>Bem-vind@ à Taqtile!</MainText>
+        <FieldsCell>
+          <View>
+            <SubText>Email</SubText>
+            <TextBox
+              placeholder={'email@exemple.com'}
+              autoCapitalize='none'
+              onChangeText={setEmail}
+              defaultvalue={email}
+              status={emailError}
+            />
+            <ErrorText>
+              { emailError === FieldErrors.empty && "Este campo é obrigatório" }
+              { emailError === FieldErrors.structure && "Email inválido" }
+              { !emailError && " " }
+            </ErrorText>
+          </View>
+          <View>
+            <SubText>Senha</SubText>
+            <TextBox
+              secureTextEntry
+              autoCapitalize='none'
+              onChangeText={setPassword}
+              defaultvalue={password}
+              status={passwordError}
+            />
+            <ErrorText>
+              { passwordError === FieldErrors.empty && "Este campo é obrigatório" }
+              { passwordError === FieldErrors.structure && "Senha deve conter letras e números" }
+              { passwordError === FieldErrors.length && "Senha deve ter pelo menos 7 caracteres" }
+              { !passwordError && " " }
+            </ErrorText>
+          </View>
+          <LoginButton>
+            <ButtonText onPress={() => validateLogin()}>Entrar</ButtonText>
+          </LoginButton>
+          <ErrorText>{loginError}</ErrorText>
+        </FieldsCell>
+      </Background>
+      {loading && <LoadingLayer text={"Realizando Login..."}/>}
+    </View>
   );
 };
