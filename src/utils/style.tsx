@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 import {TouchableOpacity, Text, View, TextInput, Dimensions} from 'react-native';
+import { COLORS } from './colors';
+
 const WindowHeight = Dimensions.get("screen").height;
 
 export const MainContainer = styled.View`
@@ -31,7 +33,7 @@ export const SubText = styled.Text`
   color: grey;
 `;
 export const LoginButton = styled.TouchableOpacity`
-  background-color: #6d50f2;
+  background-color: ${COLORS.purple};
   padding: 10px;
   border-radius: 10px;
   margin-top: 20px;
@@ -47,7 +49,7 @@ export const ErrorText = styled.Text`
   align-self: center;
 `;
 export const LoadingBackground= styled.View`
-  background-color: #6d50f2;
+  background-color: ${COLORS.purple};
   width: 100%;
   height: 100%;
   opacity: 0.5;

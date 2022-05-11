@@ -4,6 +4,7 @@
 
 import { LoginPage } from './src/login';
 import { HomePage } from './src/home';
+import { AddUserPage } from './src/add-user';
 import React from 'react';
 import { Navigation } from 'react-native-navigation';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
@@ -24,6 +25,12 @@ Navigation.registerComponent('Home', () => (props) =>
   </ApolloProvider>,
   () => HomePage
 );
+Navigation.registerComponent('AddUser', () => (props) =>
+  <ApolloProvider client={client}>
+    <AddUserPage {...props} />
+  </ApolloProvider>,
+  () => AddUserPage
+);
 
 Navigation.events().registerAppLaunchedListener(async () => {
   Navigation.setRoot({
@@ -32,10 +39,10 @@ Navigation.events().registerAppLaunchedListener(async () => {
         children: [
           {
             component: {
-              name: 'Login',
+              name: 'AddUser',
               options: {
                 topBar: {
-                  visible: false
+                  visible: false,
                 }
               }
             }

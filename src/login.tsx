@@ -6,12 +6,7 @@ import { validateEmail, validatePassword } from './utils/string-validation';
 import { useLogin } from './utils/login-service';
 import { LoadingLayer } from './components/loading-layer';
 import { FieldErrors} from './utils/errors';
-
-const MandatoryFieldWarning = <ErrorText>Este campo é obrigatório</ErrorText>
-const InvalidEmailWarning = <ErrorText>Email inválido</ErrorText>
-const NoErrorText = <ErrorText> </ErrorText>
-const InvalidPasswordWarning = <ErrorText>Senha deve conter letras e números</ErrorText>
-const PasswordlengthWarning = <ErrorText>Senha deve ter pelo menos 7 caracteres</ErrorText>
+import { EmailField } from './components/form-fields';
 
 export const LoginPage = (props) => {
 
@@ -36,21 +31,7 @@ export const LoginPage = (props) => {
       <Background>
         <MainText>Bem-vind@ à Taqtile!</MainText>
         <FieldsCell>
-          <View>
-            <SubText>Email</SubText>
-            <TextBox
-              placeholder={'email@exemple.com'}
-              autoCapitalize='none'
-              onChangeText={setEmail}
-              defaultvalue={email}
-              status={emailError}
-            />
-            <ErrorText>
-              { emailError === FieldErrors.empty && "Este campo é obrigatório" }
-              { emailError === FieldErrors.structure && "Email inválido" }
-              { !emailError && " " }
-            </ErrorText>
-          </View>
+          <EmailField setvalue={setEmail} value={email} error={emailError}/>
           <View>
             <SubText>Senha</SubText>
             <TextBox
