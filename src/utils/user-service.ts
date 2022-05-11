@@ -1,4 +1,4 @@
-import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery, useLazyQuery } from '@apollo/client';
 
 const GET_CLIENTS_LIST = gql`
   query{
@@ -14,20 +14,19 @@ const GET_CLIENTS_LIST = gql`
 
 export const useUserList = (token) => {
 
-  const resp = useQuery(GET_CLIENTS_LIST, {
-    context: {
-      headers: {
-        "Authorization": token
-      } 
-    },
-    pollInterval: 500,
-  });
+  const [getClientList,resp] = useLazyQuery(GET_CLIENTS_LIST, {
+      context: {
+        headers: {
+          "Authorization": token
+        } 
+      },
+    });
 
   const loading = resp.loading
   const error = resp.error?.message;
   const clientList = resp.data?.users.nodes;
 
 
-  return { loading, error, clientList }
+  return { loading, error, clientList, getClientList }
 
 }

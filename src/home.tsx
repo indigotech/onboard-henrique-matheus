@@ -9,12 +9,13 @@ import { isTypeSystemDefinitionNode } from 'graphql';
 export const HomePage = (props) => {
 
   const [token, setToken] = useState<any>();
-  const { loading, error, clientList } = useUserList(token);
+  const { loading, error, clientList, getClientList } = useUserList(token);
 
   useEffect(() => {
     const loadUserToken = async () => {
       const userToken = await getUserToken();
       setToken(userToken);
+      getClientList();
     } 
     loadUserToken();
   },[]);
