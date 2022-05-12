@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { TouchableOpacity, Text } from 'react-native';
 import styled from 'styled-components/native';
 
-const ClientContainer = styled.View`
+const ClientContainer = styled.TouchableOpacity`
     padding: 10px;
     border-radius: 5px;
     align-text: left;
@@ -12,9 +12,9 @@ const ClientContainer = styled.View`
     margin-top: 5px;
 `;
 
-export const ClientCard = ({ client }) => {
+export const ClientCard = ({ client, func }) => {
     return (
-        <ClientContainer>
+        <ClientContainer onPress={() => func()}>
             <Text>{client.name}</Text>
             <Text>{client.email}</Text>
         </ClientContainer>

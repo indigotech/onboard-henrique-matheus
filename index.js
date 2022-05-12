@@ -4,6 +4,7 @@
 
 import { LoginPage } from './src/login';
 import { HomePage } from './src/home';
+import { DetailsPage } from './src/details';
 import React from 'react';
 import { Navigation } from 'react-native-navigation';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
@@ -23,6 +24,12 @@ Navigation.registerComponent('Home', () => (props) =>
     <HomePage {...props} />
   </ApolloProvider>,
   () => HomePage
+);
+Navigation.registerComponent('UserDetails', () => (props) =>
+  <ApolloProvider client={client}>
+    <DetailsPage {...props} />
+  </ApolloProvider>,
+  () => DetailsPage
 );
 
 Navigation.events().registerAppLaunchedListener(async () => {

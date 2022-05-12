@@ -26,6 +26,10 @@ export const MainText = styled.Text`
   padding: 10px;
   color: black;
 `;
+export const TitleText = styled.Text`
+  font-size: 18px;
+  color: black;
+`;
 export const SubText = styled.Text`
   font-size: 15px;
   color: grey;
@@ -59,4 +63,8 @@ export const LoadingText = styled.Text`
   text-align: center;
   color: white;
   opacity: 1;
+`;
+
+export const InfoDisplayContainer= styled.View`
+  padding-top: 10px;
 `;
