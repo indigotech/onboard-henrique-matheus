@@ -26,11 +26,7 @@ export const HomePage = (props) => {
   },[]);
 
   useEffect(() => {
-    if(clientListDisplayed){
-      setClientList(clientListDisplayed.concat(clientList));
-    }else{
-      setClientList(clientList);
-    }
+    setClientList(clientListDisplayed.concat(clientList));
   },[clientList]);
 
   return (
