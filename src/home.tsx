@@ -26,7 +26,7 @@ export const HomePage = (props) => {
   },[]);
 
   useEffect(() => {
-    setClientList(clientListDisplayed.concat(clientList));
+    if (clientList) setClientList(clientListDisplayed.concat(clientList));
   },[clientList]);
 
   return (
@@ -38,7 +38,7 @@ export const HomePage = (props) => {
           <FlatList
             data={clientListDisplayed}
             renderItem={({ item }) => (
-              item && <ClientCard client={item}/>
+              <ClientCard client={item}/>
             )}
             ListFooterComponent={() => (
               <Button title="Carregar mais" onPress={() => setOffset(offset + ClientsPerLoad)}/>
