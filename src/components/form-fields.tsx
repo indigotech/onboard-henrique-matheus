@@ -80,37 +80,32 @@ export const DateField = props => {
   return (
     <View>
       <SubText>Data de nascimento</SubText>
-      <DatePicker
-        style={{width: '100%'}}
-        date={props.value}
-        mode="date"
-        placeholder="Selecione uma data"
-        format="YYYY-MM-DD"
-        minDate={minDate}
-        maxDate={date}
-        confirmBtnText="Confirmar"
-        cancelBtnText="Cancelar"
-        useNativeDriver={false}
-        customStyles={{
-          dateIcon: {
-            position: 'absolute',
-            left: 15,
-            top: 4,
-            marginLeft: 0,
-          },
-          dateInput: {
-            marginLeft: 51,
-            margin: 10,
-            padding: 10,
-            border: 1,
-            borderRadius: 10,
-            borderColor: props.error === undefined ? 'black' : 'red',
-          },
-        }}
-        onDateChange={value => {
-          props.setValue(value);
-        }}
-      />
+      <View style={{padding:10}}>
+        <DatePicker
+          style={{width: '100%'}}
+          date={props.value}
+          mode="date"
+          placeholder="Selecione uma data"
+          format="YYYY-MM-DD"
+          minDate={minDate}
+          maxDate={date}
+          confirmBtnText="Confirmar"
+          cancelBtnText="Cancelar"
+          useNativeDriver={false}
+          showIcon={false}
+          customStyles={{
+            dateInput: {
+              padding: 10,
+              border: 1,
+              borderRadius: 10,
+              borderColor: props.error === undefined ? 'black' : 'red',
+            },
+          }}
+          onDateChange={value => {
+            props.setValue(value);
+          }}
+        />
+      </View>
       <ErrorText>
         {props.error === FieldErrors.empty && 'Este campo é obrigatório'}
         {!props.error && ' '}
