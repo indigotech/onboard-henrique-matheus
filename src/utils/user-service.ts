@@ -1,4 +1,5 @@
 import { gql, useLazyQuery, useMutation } from '@apollo/client';
+import { navigateToHome, returnPage } from './navigation-service';
 
 const GET_CLIENTS_LIST = gql`
   query($offset: Int!, $limit: Int!){
@@ -65,7 +66,7 @@ export const useAddUser = () => {
             setError('Há informações incorretas, confira os campos novamente');
           } else {
             setError('');
-            console.log("cadastrado com sucesso!");
+            returnPage(componentID);
           }
         })
         .catch((e) => {

@@ -39,7 +39,7 @@ Navigation.events().registerAppLaunchedListener(async () => {
         children: [
           {
             component: {
-              name: 'AddUser',
+              name: 'Login',
               options: {
                 topBar: {
                   visible: false,

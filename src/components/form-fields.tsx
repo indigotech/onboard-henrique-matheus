@@ -63,7 +63,6 @@ export const PhoneField = props => {
         }}
         ref={phoneInput}
       />
-      <ErrorText>{props.value}</ErrorText>
       <ErrorText>
         {props.error === FieldErrors.empty && 'Este campo é obrigatório'}
         {props.error === FieldErrors.structure && 'Número inválido'}
@@ -85,7 +84,7 @@ export const DateField = props => {
         style={{width: '100%'}}
         date={props.value}
         mode="date"
-        placeholder="Seleciona uma data"
+        placeholder="Selecione uma data"
         format="YYYY-MM-DD"
         minDate={minDate}
         maxDate={date}
@@ -138,9 +137,6 @@ export const UserRoleField = props => {
         setOpen={setOpen}
         setValue={props.setValue}
         setItems={setItems}
-        onChangeValue={(value) => {
-          console.log(value);
-        }}
         dropDownDirection="TOP"
         dropDownContainerStyle={{
           backgroundColor: "white",

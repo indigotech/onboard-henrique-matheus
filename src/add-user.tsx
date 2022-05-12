@@ -51,7 +51,6 @@ export const AddUserPage = props => {
   return (
     <View>
       <Background>
-        <FieldsCell>
           <NameField setvalue={setName} value={name} error={nameError} />
           <PhoneField setvalue={setPhone} value={phone} error={phoneError} setError={setPhoneError}/>
           <DateField setValue={setBirthDate} value={birthDate} error={birthDateError} />
@@ -61,7 +60,6 @@ export const AddUserPage = props => {
             <ButtonText onPress={() => addUserInfo()}>Cadastrar</ButtonText>
           </LoginButton>
           <ErrorText>{addUserError}</ErrorText>
-        </FieldsCell>
       </Background>
       {loading && <LoadingLayer text={'Realizando cadastro...'} />}
     </View>
