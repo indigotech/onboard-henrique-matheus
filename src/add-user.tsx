@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View} from 'react-native';
 import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from './utils/style';
-import {validateEmail, validatePassword} from './utils/string-validation';
+import {validateEmail, validateEmptyString} from './utils/string-validation';
 import {useLogin} from './utils/login-service';
 import {LoadingLayer} from './components/loading-layer';
 import {FieldErrors} from './utils/errors';
@@ -26,10 +26,15 @@ export const AddUserPage = props => {
   const addUser = () => {
     setLoginError('');
     const validEmail = validateEmail(email, setEmailError);
-    // const validPassword = validatePassword(password, setPasswordError);
-    // if (validEmail && validPassword) {
-    //   login(email, password, setLoginError, props.componentId);
-    // }
+    const validPhone = phoneError == FieldErrors.structure ? false : validateEmptyString(phone, setPhoneError);
+    const validDate = validateEmptyString(birthDate, setBirthDateError);
+    const validName = validateEmptyString(name,setNameError);
+    const validRole = validateEmptyString(role,setRoleError);
+
+    if (validEmail && validPhone && validDate && validName && validRole) {
+      // login(email, password, setLoginError, props.componentId);
+      console.log("Cadastrar!");
+    }
   };
 
   return (

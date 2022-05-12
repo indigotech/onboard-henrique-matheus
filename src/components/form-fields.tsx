@@ -130,6 +130,7 @@ export const UserRoleField = props => {
     <View>
       <SubText>Cargo</SubText>
       <DropDownPicker
+        placeholder='Selecione uma opção'
         open={open}
         value={props.value}
         items={items}
@@ -148,7 +149,8 @@ export const UserRoleField = props => {
           padding: 10,
         }}
         style={{
-          borderRadius: 10
+          borderRadius: 10,
+          borderColor: props.error === undefined ? 'black' : 'red',
         }}
       />
       <ErrorText>

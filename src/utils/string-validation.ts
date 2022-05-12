@@ -1,3 +1,5 @@
+import { FieldErrors } from './errors';
+
 function containsAnyLetter(str: string) {
   return /[a-zA-Z]/.test(str);
 }
@@ -7,15 +9,15 @@ function containsAnyDigit(str: string) {
 
 export const validateEmail = (email, setEmailError) => {
   if (email.length === 0){
-    setEmailError('empty');
+    setEmailError(FieldErrors.empty);
     return false;
   } else if (email.search('@') === -1){
-    setEmailError('structure');
+    setEmailError(FieldErrors.structure);
     return false;
   } else {
     var emailSplited = email.split('@',2);
     if (!(emailSplited[1].endsWith('.com') || emailSplited[1].endsWith('.com.br')) || emailSplited[1].length <= 4 || emailSplited[0].length === 0 ){
-      setEmailError('structure');
+      setEmailError(FieldErrors.structure);
       return false;
     } else {
       setEmailError(undefined);
@@ -26,16 +28,26 @@ export const validateEmail = (email, setEmailError) => {
 
 export const validatePassword = (password, setPasswordError) => {
   if (password.length === 0){
-    setPasswordError('empty');
+    setPasswordError(FieldErrors.empty);
     return false;
   } else if (password.length < 7){
-    setPasswordError('length');
+    setPasswordError(FieldErrors.length);
     return false;
   } else if (containsAnyLetter(password) && containsAnyDigit(password)){
     setPasswordError(undefined);
     return true;
   } else {
-    setPasswordError('structure');
+    setPasswordError(FieldErrors.structure);
     return false;
   } 
+};
+
+export const validateEmptyString = (value, setValueError) => {
+  if (value.length === 0){
+    setValueError(FieldErrors.empty);
+    return false;
+  } else {
+    setValueError(undefined);
+    return true;
+  }
 };
