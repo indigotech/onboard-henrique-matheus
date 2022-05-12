@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, SafeAreaViewBase, SafeAreaView } from 'react-native';
+import { View, Text, FlatList, SafeAreaView, Button } from 'react-native';
 import { ClientCard } from './components/client-card';
 import { getUserToken } from './utils/cache';
 import { MainContainer } from './utils/style';
 import { useUserList } from './utils/user-service';
-import { isTypeSystemDefinitionNode } from 'graphql';
+import styled from 'styled-components/native';
+
+const ClientsPerLoad = 20;
 
 export const HomePage = (props) => {
 
   const [token, setToken] = useState<any>();
-  const { loading, error, clientList, getClientList } = useUserList(token);
+  const [offset, setOffset] = useState(0);
+  const { loading, error, clientList, getClientList } = useUserList(token, offset, ClientsPerLoad);
+  const [ clientListDisplayed, setClientList] = useState<any[]>([]);
+
 
   useEffect(() => {
     const loadUserToken = async () => {
@@ -20,17 +25,27 @@ export const HomePage = (props) => {
     loadUserToken();
   },[]);
 
+  useEffect(() => {
+    setClientList(clientListDisplayed.concat(clientList));
+  },[clientList]);
+
   return (
     <SafeAreaView>
       <MainContainer>
       <Text>Lista de clientes</Text>
       {!loading &&
-        <FlatList
-          data={clientList}
-          renderItem={({ item }) => (
-            <ClientCard client={item}/>
-          )}
-        />
+        <View style={{height: '95%'}}>
+          <FlatList
+            data={clientListDisplayed}
+            renderItem={({ item }) => (
+              item && <ClientCard client={item}/>
+            )}
+            ListFooterComponent={() => (
+              <Button title="Carregar mais" onPress={() => setOffset(offset + ClientsPerLoad)}/>
+            )}
+            extraData={true}
+          />
+        </View>
       }
       {!loading && <Text>{error}</Text>}
       {loading && <Text>Loading...</Text>}

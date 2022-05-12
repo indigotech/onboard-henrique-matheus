@@ -1,20 +1,22 @@
-import { gql, useQuery, useLazyQuery } from '@apollo/client';
+import { gql, useLazyQuery } from '@apollo/client';
 
 const GET_CLIENTS_LIST = gql`
-  query{
-      users(pageInfo: {offset: 0, limit: 20}){
+  query($offset: Int!, $limit: Int!){
+    users(pageInfo: {offset: $offset, limit: $limit}){
       nodes{
-          id
-          name
-          email
+        name
+        email
       }
-    }
+    },
   }
 `;
 
-export const useUserList = (token) => {
+export const useUserList = (token, offset, limit) => {
 
   const [getClientList,resp] = useLazyQuery(GET_CLIENTS_LIST, {
+      variables: {
+        offset: offset, limit: limit
+      },
       context: {
         headers: {
           "Authorization": token
