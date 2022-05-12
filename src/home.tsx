@@ -13,7 +13,7 @@ export const HomePage = (props) => {
   const [token, setToken] = useState<any>();
   const [offset, setOffset] = useState(0);
   const { loading, error, clientList, getClientList } = useUserList(token, offset, ClientsPerLoad);
-  const [ clientListDisplayed, setClientList] = useState<any[]>([]);
+  const [ clientListDisplayed, setClientListDisplayed] = useState<any[]>([]);
 
 
   useEffect(() => {
@@ -26,7 +26,9 @@ export const HomePage = (props) => {
   },[]);
 
   useEffect(() => {
-    setClientList(clientListDisplayed.concat(clientList));
+    if (clientList) {
+      setClientListDisplayed((currentList) => currentList ? currentList.concat(clientList) : clientList)
+    }
   },[clientList]);
 
   return (
@@ -38,7 +40,7 @@ export const HomePage = (props) => {
           <FlatList
             data={clientListDisplayed}
             renderItem={({ item }) => (
-              item && <ClientCard client={item}/>
+              <ClientCard client={item}/>
             )}
             ListFooterComponent={() => (
               <Button title="Carregar mais" onPress={() => setOffset(offset + ClientsPerLoad)}/>
