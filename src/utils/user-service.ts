@@ -1,4 +1,4 @@
-import { gql, useLazyQuery } from '@apollo/client';
+import { gql, useLazyQuery, useMutation } from '@apollo/client';
 
 const GET_CLIENTS_LIST = gql`
   query($offset: Int!, $limit: Int!){
@@ -30,5 +30,50 @@ export const useUserList = (token, offset, limit) => {
 
 
   return { loading, error, clientList, getClientList }
+
+}
+
+const ADD_USER = gql`
+  mutation($email: String!, $name: String!, $birthDate: Date!,$phone: String!, $role: UserRole!){
+    createUser(data: {email: $email, name: $name, birthDate: $birthDate, phone: $phone, role: $role}){
+      name
+      email
+      birthDate
+      id
+      phone
+      role
+    },
+  }
+  `;
+
+export const useAddUser = () => {
+
+  const [mutateFunction,  { loading, error }] = useMutation(ADD_USER);
+
+    const addUser = (token, email, name, birthDate, phone, role, setError, componentID) => {
+      return (
+        mutateFunction({
+          variables: {email: email, name: name, birthDate: birthDate, phone: phone, role: role},
+          context: {
+            headers: {
+              "Authorization": token
+            } 
+          }
+        })
+        .then(resp => {
+          if(!resp.data){
+            setError('Há informações incorretas, confira os campos novamente');
+          } else {
+            setError('');
+            console.log("cadastrado com sucesso!");
+          }
+        })
+        .catch((e) => {
+          setError(e.graphQLErrors[0].message);
+        })
+      );
+    };
+
+  return { addUser, loading, error }
 
 }

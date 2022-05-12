@@ -2,12 +2,16 @@ import React, {useState, useEffect} from 'react';
 import {View} from 'react-native';
 import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from './utils/style';
 import {validateEmail, validateEmptyString} from './utils/string-validation';
-import {useLogin} from './utils/login-service';
 import {LoadingLayer} from './components/loading-layer';
 import {FieldErrors} from './utils/errors';
 import { EmailField, NameField, PhoneField, DateField, UserRoleField } from './components/form-fields';
+import { useAddUser } from './utils/user-service';
+import { getUserToken } from './utils/cache';
 
 export const AddUserPage = props => {
+
+  const [token, setToken] = useState<any>();
+
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
@@ -19,12 +23,20 @@ export const AddUserPage = props => {
   const [phoneError, setPhoneError] = useState<FieldErrors>();
   const [birthDateError, setBirthDateError] = useState<FieldErrors>();
   const [roleError, setRoleError] = useState<FieldErrors>();
-  const [loginError, setLoginError] = useState<string>('');
+  const [addUserError, setAddUserError] = useState<string>('');
 
-  const {login, loading} = useLogin();
+  const { addUser, loading } = useAddUser();
 
-  const addUser = () => {
-    setLoginError('');
+  useEffect(() => {
+    const loadUserToken = async () => {
+      const userToken = await getUserToken();
+      setToken(userToken);
+    };
+    loadUserToken();
+  }, []);
+
+  const addUserInfo = () => {
+    setAddUserError('');
     const validEmail = validateEmail(email, setEmailError);
     const validPhone = phoneError == FieldErrors.structure ? false : validateEmptyString(phone, setPhoneError);
     const validDate = validateEmptyString(birthDate, setBirthDateError);
@@ -32,8 +44,7 @@ export const AddUserPage = props => {
     const validRole = validateEmptyString(role,setRoleError);
 
     if (validEmail && validPhone && validDate && validName && validRole) {
-      // login(email, password, setLoginError, props.componentId);
-      console.log("Cadastrar!");
+      addUser(token, email, name, birthDate, phone.replace('+', ''), role, setAddUserError,props.componentId);
     }
   };
 
@@ -47,12 +58,12 @@ export const AddUserPage = props => {
           <EmailField setvalue={setEmail} value={email} error={emailError} />
           <UserRoleField setValue={setRole} value={role} error={roleError}/>
           <LoginButton>
-            <ButtonText onPress={() => addUser()}>Cadastrar</ButtonText>
+            <ButtonText onPress={() => addUserInfo()}>Cadastrar</ButtonText>
           </LoginButton>
-          <ErrorText>{loginError}</ErrorText>
+          <ErrorText>{addUserError}</ErrorText>
         </FieldsCell>
       </Background>
-      {loading && <LoadingLayer text={'Realizando Login...'} />}
+      {loading && <LoadingLayer text={'Realizando cadastro...'} />}
     </View>
   );
 };

@@ -1,8 +1,6 @@
 import styled from 'styled-components/native';
-import {TouchableOpacity, Text, View, TextInput, Dimensions} from 'react-native';
+import {TouchableOpacity, Text, View, TextInput} from 'react-native';
 import { COLORS } from './colors';
-
-const WindowHeight = Dimensions.get("screen").height;
 
 export const MainContainer = styled.View`
   padding: 10px;
@@ -10,7 +8,7 @@ export const MainContainer = styled.View`
 export const Background = styled.View`
   padding: 20px;
   padding-top: 100px;
-  height: ${WindowHeight};
+  height: 100%;
 `;
 export const FieldsCell = styled.View`
   padding-top: 100px;

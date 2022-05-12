@@ -63,6 +63,7 @@ export const PhoneField = props => {
         }}
         ref={phoneInput}
       />
+      <ErrorText>{props.value}</ErrorText>
       <ErrorText>
         {props.error === FieldErrors.empty && 'Este campo é obrigatório'}
         {props.error === FieldErrors.structure && 'Número inválido'}
@@ -90,7 +91,7 @@ export const DateField = props => {
         maxDate={date}
         confirmBtnText="Confirmar"
         cancelBtnText="Cancelar"
-        useNativeDriver={true}
+        useNativeDriver={false}
         customStyles={{
           dateIcon: {
             position: 'absolute',
