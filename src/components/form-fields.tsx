@@ -10,14 +10,24 @@ import styled from 'styled-components/native';
 import DatePicker from 'react-native-datepicker';
 import DropDownPicker from 'react-native-dropdown-picker';
 
-export const EmailField = props => {
+interface FieldProps {
+  value: string;
+  error?: FieldErrors;
+  onChangeValue: (value: string) => void;
+}
+
+interface PhoneFieldProps extends FieldProps {
+  onChangeError: (error: FieldErrors | undefined) => void;
+}
+
+export const EmailField = (props: FieldProps) => {
   return (
     <View>
       <SubText>Email</SubText>
       <TextBox
         placeholder={'email@exemple.com'}
         autoCapitalize="none"
-        onChangeText={props.setvalue}
+        onChangeText={props.onChangeValue}
         defaultvalue={props.value}
         status={props.error}
       />
@@ -30,13 +40,13 @@ export const EmailField = props => {
   );
 };
 
-export const NameField = props => {
+export const NameField = (props: FieldProps) => {
   return (
     <View>
       <SubText>Nome</SubText>
       <TextBox
         autoCapitalize="none"
-        onChangeText={props.setvalue}
+        onChangeText={props.onChangeValue}
         defaultvalue={props.value}
         status={props.error}
       />
@@ -48,19 +58,21 @@ export const NameField = props => {
   );
 };
 
-export const PhoneField = props => {
+export const PhoneField = (props: PhoneFieldProps) => {
   const phoneInput = useRef<PhoneInput>(null);
+
+  const handleChangeFormattedText = (value: string) => {
+    props.onChangeValue(value);
+    isValidNumber(value, phoneInput.current?.getCountryCode(value))
+      ? props.onChangeError(undefined)
+      : props.onChangeError(FieldErrors.structure);
+  };
 
   return (
     <View>
       <SubText>Telefone</SubText>
       <PhoneInput
-        onChangeFormattedText={value => {
-          props.setvalue(value);
-          isValidNumber(value, phoneInput.current?.getCountryCode(value))
-            ? props.setError(undefined)
-            : props.setError(FieldErrors.structure);
-        }}
+        onChangeFormattedText={handleChangeFormattedText}
         ref={phoneInput}
       />
       <ErrorText>
@@ -72,7 +84,7 @@ export const PhoneField = props => {
   );
 };
 
-export const DateField = props => {
+export const DateField = (props: FieldProps) => {
   let today = new Date();
   let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
   let minDate = today.getFullYear() - 120 + '-01-01';
@@ -102,7 +114,7 @@ export const DateField = props => {
             },
           }}
           onDateChange={value => {
-            props.setValue(value);
+            props.onChangeValue(value);
           }}
         />
       </View>
@@ -114,7 +126,7 @@ export const DateField = props => {
   );
 };
 
-export const UserRoleField = props => {
+export const UserRoleField = (props: FieldProps) => {
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState([
     {label: 'admin', value: 'admin'},
@@ -130,7 +142,7 @@ export const UserRoleField = props => {
         value={props.value}
         items={items}
         setOpen={setOpen}
-        setValue={props.setValue}
+        setValue={props.onChangeValue}
         setItems={setItems}
         dropDownDirection="TOP"
         dropDownContainerStyle={{

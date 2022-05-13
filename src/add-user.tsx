@@ -41,13 +41,13 @@ export const AddUserPage = props => {
   return (
     <View>
       <Background>
-          <NameField setvalue={setName} value={name} error={nameError} />
-          <PhoneField setvalue={setPhone} value={phone} error={phoneError} setError={setPhoneError}/>
-          <DateField setValue={setBirthDate} value={birthDate} error={birthDateError} />
-          <EmailField setvalue={setEmail} value={email} error={emailError} />
-          <UserRoleField setValue={setRole} value={role} error={roleError}/>
+          <NameField onChangeValue={setName} value={name} error={nameError} />
+          <PhoneField onChangeValue={setPhone} value={phone} error={phoneError} onChangeError={setPhoneError}/>
+          <DateField onChangeValue={setBirthDate} value={birthDate} error={birthDateError} />
+          <EmailField onChangeValue={setEmail} value={email} error={emailError} />
+          <UserRoleField onChangeValue={setRole} value={role} error={roleError}/>
           <LoginButton>
-            <ButtonText onPress={() => addUserInfo()}>Cadastrar</ButtonText>
+            <ButtonText onPress={addUserInfo}>Cadastrar</ButtonText>
           </LoginButton>
           <ErrorText>{addUserError}</ErrorText>
       </Background>
