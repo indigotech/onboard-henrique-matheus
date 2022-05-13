@@ -1,7 +1,7 @@
 import { gql, useLazyQuery, useQuery } from '@apollo/client';
 import { getUserToken } from './cache';
 
-const GET_CLIENTS_LIST = gql`
+const GET_CLIENTS_LIST_QUERY = gql`
   query($offset: Int!, $limit: Int!){
     users(pageInfo: {offset: $offset, limit: $limit}){
       nodes{
@@ -15,7 +15,7 @@ const GET_CLIENTS_LIST = gql`
 
 export const useUserList = (token, offset, limit) => {
 
-  const [getClientList,resp] = useLazyQuery(GET_CLIENTS_LIST, {
+  const [getClientList,resp] = useLazyQuery(GET_CLIENTS_LIST_QUERY, {
       variables: {
         offset: offset, limit: limit
       },
@@ -35,8 +35,8 @@ export const useUserList = (token, offset, limit) => {
 
 }
 
-const GET_USER_BY_ID = gql`
-  query($id: ID!){
+const GET_USER_BY_ID_QUERY = gql`
+  query GetUserByIdQuery($id: ID!){
     user(id: $id){
       name
       phone
@@ -49,7 +49,7 @@ const GET_USER_BY_ID = gql`
 
 export const useUserInfo = (token, id) => {
 
-  const [getUserInfo ,resp] = useLazyQuery(GET_USER_BY_ID, {
+  const [getUserInfo ,resp] = useLazyQuery(GET_USER_BY_ID_QUERY, {
       variables: {
         id: id
       },

@@ -41,7 +41,7 @@ export const HomePage = (props) => {
           <FlatList
             data={clientListDisplayed}
             renderItem={({ item }) => (
-              <ClientCard client={item} func={() => {
+              <ClientCard client={item} onClientTap={() => {
                 Navigation.push(props.componentId, {
                   component: {
                     name: 'UserDetails',

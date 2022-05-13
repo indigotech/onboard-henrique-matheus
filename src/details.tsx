@@ -15,7 +15,7 @@ const InfoDisplay = ({title, value}) => {
 
 export const DetailsPage = (props) => {
 
-  const [token, setToken] = useState<any>();
+  const [token, setToken] = useState<string>();
   const { loading, error, user, getUserInfo } = useUserInfo(token, props.id);
 
   useEffect(() => {
