@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {View} from 'react-native';
-import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from './utils/style';
-import {validateEmail, validateEmptyString} from './utils/string-validation';
-import {LoadingLayer} from './components/loading-layer';
-import {FieldErrors} from './utils/errors';
-import { EmailField, NameField, PhoneField, DateField, UserRoleField } from './components/form-fields';
-import { emptyUser, emptyUserErrors, useAddUser, UserErrorInterface, UserInterface, UserRole } from './utils/user-service';
-import { getUserToken } from './utils/cache';
+import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from '../utils/style';
+import {validateEmail, validateEmptyString} from '../data/string-validation';
+import {LoadingLayer} from '../components/loading-layer';
+import {FieldErrors} from '../data/errors';
+import { EmailField, NameField, PhoneField, DateField, UserRoleField } from '../components/form-fields';
+import { emptyUser, emptyUserErrors, useAddUser, UserErrorInterface, UserInterface, UserRole } from '../data/user-service';
+import { getUserToken } from '../utils/cache';
 
 export const AddUserPage = props => {
 

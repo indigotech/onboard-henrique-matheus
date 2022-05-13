@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, FlatList, SafeAreaView, Button} from 'react-native';
-import {ClientCard} from './components/client-card';
-import {getUserToken} from './utils/cache';
-import {MainContainer} from './utils/style';
-import {useUserList} from './utils/user-service';
+import {ClientCard} from '../components/client-card';
+import {getUserToken} from '../utils/cache';
+import {MainContainer} from '../utils/style';
+import {useUserList} from '../data/user-service';
 import styled from 'styled-components/native';
 import FAB from 'react-native-fab';
-import {COLORS} from './utils/colors';
-import { navigateToAddUser } from './utils/navigation-service';
+import {COLORS} from '../utils/colors';
+import { navigateToAddUser } from '../data/navigation-service';
 
 const ClientsPerLoad = 20;
 

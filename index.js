@@ -2,9 +2,9 @@
  * @format
  */
 
-import { LoginPage } from './src/login';
-import { HomePage } from './src/home';
-import { AddUserPage } from './src/add-user';
+import { LoginPage } from './src/modules/login';
+import { HomePage } from './src/modules/home';
+import { AddUserPage } from './src/modules/add-user';
 import React from 'react';
 import { Navigation } from 'react-native-navigation';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';

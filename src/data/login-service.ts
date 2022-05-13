@@ -1,5 +1,5 @@
 import { gql, useMutation } from '@apollo/client';
-import { saveUserToken } from './cache';
+import { saveUserToken } from '../utils/cache';
 import { Navigation } from 'react-native-navigation';
 import { navigateToHome } from './navigation-service';
 

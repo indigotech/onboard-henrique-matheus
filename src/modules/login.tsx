@@ -1,12 +1,12 @@
 /* eslint-disable prettier/prettier */
 import React, {useState, useEffect} from 'react';
 import { View } from 'react-native';
-import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from './utils/style';
-import { validateEmail, validatePassword } from './utils/string-validation';
-import { useLogin } from './utils/login-service';
-import { LoadingLayer } from './components/loading-layer';
-import { FieldErrors} from './utils/errors';
-import { EmailField } from './components/form-fields';
+import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from '../utils/style';
+import { validateEmail, validatePassword } from '../data/string-validation';
+import { useLogin } from '../data/login-service';
+import { LoadingLayer } from '../components/loading-layer';
+import { FieldErrors} from '../data/errors';
+import { EmailField } from '../components/form-fields';
 
 export const LoginPage = (props) => {
 

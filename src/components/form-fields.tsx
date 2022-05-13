@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
 import {View} from 'react-native';
-import {FieldErrors} from '../utils/errors';
+import {FieldErrors} from '../data/errors';
 import {SubText, TextBox, ErrorText} from '../utils/style';
 import PhoneInput, {
   isValidNumber,
@@ -9,7 +9,7 @@ import PhoneInput, {
 import styled from 'styled-components/native';
 import DatePicker from 'react-native-datepicker';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { UserRole } from '../utils/user-service';
+import { UserRole } from '../data/user-service';
 
 interface FieldProps {
   value: string | undefined;
