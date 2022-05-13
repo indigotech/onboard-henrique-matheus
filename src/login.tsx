@@ -31,7 +31,7 @@ export const LoginPage = (props) => {
       <Background>
         <MainText>Bem-vind@ à Taqtile!</MainText>
         <FieldsCell>
-          <EmailField setvalue={setEmail} value={email} error={emailError}/>
+          <EmailField onChangeValue={setEmail} value={email} error={emailError}/>
           <View>
             <SubText>Senha</SubText>
             <TextBox

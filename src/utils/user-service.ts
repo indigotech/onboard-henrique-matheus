@@ -1,5 +1,31 @@
 import { gql, useLazyQuery, useMutation } from '@apollo/client';
+import { UserRoleField } from '../components/form-fields';
+import { FieldErrors } from './errors';
 import { navigateToHome, returnPage } from './navigation-service';
+
+export enum UserRole {
+  admin = 'admin',
+  user = 'user',
+}
+
+export interface UserInterface{
+  email: string | undefined,
+  name: string | undefined,
+  phone: string | undefined,
+  birthDate: string | undefined,
+  role: UserRole | undefined
+}
+
+export interface UserErrorInterface{
+  email: FieldErrors | undefined,
+  name: FieldErrors | undefined,
+  phone: FieldErrors | undefined,
+  birthDate: FieldErrors | undefined,
+  role: FieldErrors | undefined
+}
+
+export const emptyUser:UserInterface = {name: undefined, birthDate: undefined, email: undefined, role: undefined, phone: undefined};
+export const emptyUserErrors:UserErrorInterface = {name: undefined, birthDate: undefined, email: undefined, role: undefined, phone: undefined};
 
 const GET_CLIENTS_LIST = gql`
   query($offset: Int!, $limit: Int!){

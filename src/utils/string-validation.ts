@@ -8,7 +8,7 @@ function containsAnyDigit(str: string) {
 }
 
 export const validateEmail = (email, setEmailError) => {
-  if (email.length === 0){
+  if (!email || email.length === 0){
     setEmailError(FieldErrors.empty);
     return false;
   } else if (email.search('@') === -1){
@@ -27,7 +27,7 @@ export const validateEmail = (email, setEmailError) => {
 };
 
 export const validatePassword = (password, setPasswordError) => {
-  if (password.length === 0){
+  if (!password || password.length === 0){
     setPasswordError(FieldErrors.empty);
     return false;
   } else if (password.length < 7){
@@ -43,7 +43,7 @@ export const validatePassword = (password, setPasswordError) => {
 };
 
 export const validateEmptyString = (value, setValueError) => {
-  if (value.length === 0){
+  if (!value || value.length === 0){
     setValueError(FieldErrors.empty);
     return false;
   } else {

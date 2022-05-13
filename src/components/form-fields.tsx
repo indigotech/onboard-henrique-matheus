@@ -9,11 +9,12 @@ import PhoneInput, {
 import styled from 'styled-components/native';
 import DatePicker from 'react-native-datepicker';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { UserRole } from '../utils/user-service';
 
 interface FieldProps {
-  value: string;
-  error?: FieldErrors;
-  onChangeValue: (value: string) => void;
+  value: string | undefined;
+  error?: FieldErrors | undefined;
+  onChangeValue: (value: string | undefined | UserRole) => void;
 }
 
 interface PhoneFieldProps extends FieldProps {
@@ -129,8 +130,8 @@ export const DateField = (props: FieldProps) => {
 export const UserRoleField = (props: FieldProps) => {
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState([
-    {label: 'admin', value: 'admin'},
-    {label: 'user', value: 'user'}
+    {label: 'admin', value: UserRole.admin},
+    {label: 'user', value: UserRole.user}
   ]);
 
   return (
@@ -156,6 +157,8 @@ export const UserRoleField = (props: FieldProps) => {
           borderRadius: 10,
           borderColor: props.error === undefined ? 'black' : 'red',
         }}
+        // onChangeValue={props.onChangeValue}
+        // onChangeValue={(value) => console.log("öi",value)}
       />
       <ErrorText>
         {props.error === FieldErrors.empty && 'Este campo é obrigatório'}
