@@ -11,6 +11,7 @@ import DatePicker from 'react-native-datepicker';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { UserRole } from '../data/user-service';
 import { COLORS } from '../utils/colors';
+import { MARGINS } from '../utils/margin';
 
 interface FieldProps {
   value: string | undefined;
@@ -106,7 +107,7 @@ export const PhoneField = (props: PhoneFieldProps) => {
         }}
         textContainerStyle={{
           backgroundColor: COLORS.white,
-          borderRadius: 10,
+          borderRadius: MARGINS.x_medium,
         }}
         textInputStyle={{
           color: props.error === undefined ? COLORS.black : COLORS.alert,
@@ -144,7 +145,7 @@ export const DateField = (props: FieldProps) => {
         customStyles={{
           dateInput: {
             border: 1,
-            borderRadius: 10,
+            borderRadius: MARGINS.x_medium,
             height: 50,
             borderColor: props.error === undefined ? COLORS.gray : COLORS.alert,
           },
@@ -185,7 +186,7 @@ export const UserRoleField = (props: FieldProps) => {
           alignSelf: 'center',
         }}
         style={{
-          borderRadius: 10,
+          borderRadius: MARGINS.x_medium,
           borderColor: props.error === undefined ? COLORS.gray : COLORS.alert,
         }}
       />
