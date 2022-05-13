@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 import {TouchableOpacity, Text, View, TextInput} from 'react-native';
 import { COLORS } from './colors';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 export const MainContainer = styled.View`
   padding: 10px;
@@ -14,37 +15,45 @@ export const FieldsCell = styled.View`
   padding-top: 100px;
 `;
 export const TextBox = styled.TextInput`
-  margin: 10px;
   padding: 10px;
   border: 1px;
   border-radius: 10px;
-  border-color: ${(props) => props.status === undefined ? 'black' : 'red'};
+  border-color: ${(props) => props.status === undefined ? COLORS.gray : COLORS.alert};
+  color: ${(props) => props.status === undefined ? COLORS.black : COLORS.alert};
 `;
-export const MainText = styled.Text`
-  font-size: 30px;
+export const H1 = styled.Text`
+  font-size: 24px;
   text-align: center;
-  padding: 10px;
-  color: black;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: ${Colors.black};
+  font-weight: bold;
 `;
 export const SubText = styled.Text`
-  font-size: 15px;
-  color: grey;
+  font-size: 12px;
+  font-weight: normal;
+  margin-botton: 12px;
+  color: ${(props) => props.status === undefined ? COLORS.gray : COLORS.alert};
 `;
 export const LoginButton = styled.TouchableOpacity`
   background-color: ${COLORS.purple};
   padding: 10px;
   border-radius: 10px;
+  justify-content: center;
   margin-top: 20px;
+  height: 44px;
 `;
 export const ButtonText = styled.Text`
-  font-size: 20px;
+  font-size: 16px;
   text-align: center;
-  color: white;
+  color: ${COLORS.white};
+  font-weigth: normal;
 `;
 export const ErrorText = styled.Text`
   font-size: 12px;
-  color: red;
-  align-self: center;
+  font-weight: normal;
+  color: ${COLORS.alert};
+  margin-bottom: 8px;
 `;
 export const LoadingBackground= styled.View`
   background-color: ${COLORS.purple};

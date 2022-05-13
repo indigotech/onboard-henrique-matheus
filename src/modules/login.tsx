@@ -1,12 +1,12 @@
 /* eslint-disable prettier/prettier */
 import React, {useState, useEffect} from 'react';
 import { View } from 'react-native';
-import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from '../utils/style';
+import { Background, H1, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from '../utils/style';
 import { validateEmail, validatePassword } from '../data/string-validation';
 import { useLogin } from '../data/login-service';
 import { LoadingLayer } from '../components/loading-layer';
 import { FieldErrors} from '../data/errors';
-import { EmailField } from '../components/form-fields';
+import { EmailField, PasswordField } from '../components/form-fields';
 
 export const LoginPage = (props) => {
 
@@ -29,25 +29,10 @@ export const LoginPage = (props) => {
   return (
     <View>
       <Background>
-        <MainText>Bem-vind@ à Taqtile!</MainText>
+        <H1>Bem-vind@ à Taqtile!</H1>
         <FieldsCell>
           <EmailField onChangeValue={setEmail} value={email} error={emailError}/>
-          <View>
-            <SubText>Senha</SubText>
-            <TextBox
-              secureTextEntry
-              autoCapitalize='none'
-              onChangeText={setPassword}
-              defaultvalue={password}
-              status={passwordError}
-            />
-            <ErrorText>
-              { passwordError === FieldErrors.empty && "Este campo é obrigatório" }
-              { passwordError === FieldErrors.structure && "Senha deve conter letras e números" }
-              { passwordError === FieldErrors.length && "Senha deve ter pelo menos 7 caracteres" }
-              { !passwordError && " " }
-            </ErrorText>
-          </View>
+          <PasswordField onChangeValue={setPassword} value={password} error={passwordError}/>
           <LoginButton>
             <ButtonText onPress={() => validateLogin()}>Entrar</ButtonText>
           </LoginButton>

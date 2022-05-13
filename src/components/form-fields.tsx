@@ -24,7 +24,7 @@ interface PhoneFieldProps extends FieldProps {
 export const EmailField = (props: FieldProps) => {
   return (
     <View>
-      <SubText>Email</SubText>
+      <SubText status={props.error} >Email</SubText>
       <TextBox
         placeholder={'email@exemple.com'}
         autoCapitalize="none"
@@ -41,10 +41,31 @@ export const EmailField = (props: FieldProps) => {
   );
 };
 
+export const PasswordField = (props: FieldProps) => {
+  return (
+    <View>
+      <SubText status={props.error} >Senha</SubText>
+      <TextBox
+        secureTextEntry
+        autoCapitalize='none'
+        onChangeText={props.onChangeValue}
+        defaultvalue={props.value}
+        status={props.error}
+      />
+      <ErrorText>
+        { props.error === FieldErrors.empty && "Este campo é obrigatório" }
+        { props.error === FieldErrors.structure && "Senha deve conter letras e números" }
+        { props.error === FieldErrors.length && "Senha deve ter pelo menos 7 caracteres" }
+        { !props.error && " " }
+      </ErrorText>
+    </View>
+  );
+};
+
 export const NameField = (props: FieldProps) => {
   return (
     <View>
-      <SubText>Nome</SubText>
+      <SubText status={props.error} >Nome</SubText>
       <TextBox
         autoCapitalize="none"
         onChangeText={props.onChangeValue}
@@ -71,7 +92,7 @@ export const PhoneField = (props: PhoneFieldProps) => {
 
   return (
     <View>
-      <SubText>Telefone</SubText>
+      <SubText status={props.error} >Telefone</SubText>
       <PhoneInput
         onChangeFormattedText={handleChangeFormattedText}
         ref={phoneInput}
@@ -92,7 +113,7 @@ export const DateField = (props: FieldProps) => {
 
   return (
     <View>
-      <SubText>Data de nascimento</SubText>
+      <SubText status={props.error} >Data de nascimento</SubText>
       <View style={{padding:10}}>
         <DatePicker
           style={{width: '100%'}}
@@ -136,7 +157,7 @@ export const UserRoleField = (props: FieldProps) => {
 
   return (
     <View>
-      <SubText>Cargo</SubText>
+      <SubText status={props.error} >Cargo</SubText>
       <DropDownPicker
         placeholder='Selecione uma opção'
         open={open}
