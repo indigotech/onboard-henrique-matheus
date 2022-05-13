@@ -24,8 +24,6 @@ export const useUserList = (offset, limit) => {
   const error = resp.error?.message;
   const clientList = resp.data?.users.nodes;
 
-  console.log("ërror",JSON.stringify(error))
-
   return { loading, error, clientList, getClientList }
 
 }

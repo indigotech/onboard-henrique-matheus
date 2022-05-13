@@ -10,8 +10,6 @@ import { getUserToken } from './utils/cache';
 
 export const AddUserPage = props => {
 
-  const [token, setToken] = useState<any>();
-
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
@@ -26,14 +24,6 @@ export const AddUserPage = props => {
   const [addUserError, setAddUserError] = useState<string>('');
 
   const { addUser, loading } = useAddUser();
-
-  useEffect(() => {
-    const loadUserToken = async () => {
-      const userToken = await getUserToken();
-      setToken(userToken);
-    };
-    loadUserToken();
-  }, []);
 
   const addUserInfo = () => {
     setAddUserError('');

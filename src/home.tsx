@@ -12,7 +12,7 @@ import { navigateToAddUser } from './utils/navigation-service';
 const ClientsPerLoad = 20;
 
 export const HomePage = props => {
-  const [token, setToken] = useState<any>();
+
   const [offset, setOffset] = useState(0);
   const { loading, error, clientList, getClientList } = useUserList(offset, ClientsPerLoad);
   const [ clientListDisplayed, setClientListDisplayed] = useState<any[]>([]);
@@ -20,9 +20,6 @@ export const HomePage = props => {
 
   useEffect(() => {
     const loadUserToken = async () => {
-      const userToken = await getUserToken();
-      setToken(userToken);
-      console.log("MyToken: ",userToken);
       getClientList();
     };
     loadUserToken();
