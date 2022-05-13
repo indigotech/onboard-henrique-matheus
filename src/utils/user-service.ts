@@ -29,8 +29,8 @@ export const useUserList = (offset, limit) => {
 }
 
 const ADD_USER = gql`
-  mutation($email: String!, $name: String!, $birthDate: Date!,$phone: String!, $role: UserRole!){
-    createUser(data: {email: $email, name: $name, birthDate: $birthDate, phone: $phone, role: $role}){
+  mutation($user: UserInputType!){
+    createUser(data: $user){
       name
       email
       birthDate
@@ -39,16 +39,16 @@ const ADD_USER = gql`
       role
     },
   }
-  `;
+`;
 
 export const useAddUser = () => {
 
   const [mutateFunction,  { loading, error }] = useMutation(ADD_USER);
 
-    const addUser = (email, name, birthDate, phone, role, setError, componentID) => {
+    const addUser = (user, setError, componentID) => {
       return (
         mutateFunction({
-          variables: {email: email, name: name, birthDate: birthDate, phone: phone, role: role},
+          variables: {user: user},
         })
         .then(resp => {
           if(!resp.data){
