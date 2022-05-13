@@ -12,16 +12,11 @@ const GET_CLIENTS_LIST = gql`
   }
 `;
 
-export const useUserList = (token, offset, limit) => {
+export const useUserList = (offset, limit) => {
 
   const [getClientList,resp] = useLazyQuery(GET_CLIENTS_LIST, {
       variables: {
         offset: offset, limit: limit
-      },
-      context: {
-        headers: {
-          "Authorization": token
-        } 
       },
     });
 
@@ -29,6 +24,7 @@ export const useUserList = (token, offset, limit) => {
   const error = resp.error?.message;
   const clientList = resp.data?.users.nodes;
 
+  console.log("ërror",JSON.stringify(error))
 
   return { loading, error, clientList, getClientList }
 
@@ -51,15 +47,10 @@ export const useAddUser = () => {
 
   const [mutateFunction,  { loading, error }] = useMutation(ADD_USER);
 
-    const addUser = (token, email, name, birthDate, phone, role, setError, componentID) => {
+    const addUser = (email, name, birthDate, phone, role, setError, componentID) => {
       return (
         mutateFunction({
           variables: {email: email, name: name, birthDate: birthDate, phone: phone, role: role},
-          context: {
-            headers: {
-              "Authorization": token
-            } 
-          }
         })
         .then(resp => {
           if(!resp.data){

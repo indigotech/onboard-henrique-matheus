@@ -7,12 +7,30 @@ import { HomePage } from './src/home';
 import { AddUserPage } from './src/add-user';
 import React from 'react';
 import { Navigation } from 'react-native-navigation';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import {getUserToken} from './src/utils/cache';
+
+const httpLink = createHttpLink({
+  uri: 'https://tq-template-server-sample.herokuapp.com/graphql',
+});
+
+const asyncAuthLink = setContext(async(_request, { headers }) => {
+  const token = await getUserToken();
+
+  return{
+    headers: {
+      ...headers,
+      authorization: token,
+    }
+  }
+});
 
 const client = new ApolloClient({
-  uri: 'https://tq-template-server-sample.herokuapp.com/graphql',
+  link: asyncAuthLink.concat(httpLink),
   cache: new InMemoryCache()
 });
+
 Navigation.registerComponent('Login', () => (props) =>
   <ApolloProvider client={client}>
     <LoginPage {...props} />

@@ -44,7 +44,7 @@ export const AddUserPage = props => {
     const validRole = validateEmptyString(role,setRoleError);
 
     if (validEmail && validPhone && validDate && validName && validRole) {
-      addUser(token, email, name, birthDate, phone.replace('+', ''), role, setAddUserError,props.componentId);
+      addUser(email, name, birthDate, phone.replace('+', ''), role, setAddUserError,props.componentId);
     }
   };
 
