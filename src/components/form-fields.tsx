@@ -10,6 +10,7 @@ import styled from 'styled-components/native';
 import DatePicker from 'react-native-datepicker';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { UserRole } from '../data/user-service';
+import { COLORS } from '../utils/colors';
 
 interface FieldProps {
   value: string | undefined;
@@ -96,6 +97,20 @@ export const PhoneField = (props: PhoneFieldProps) => {
       <PhoneInput
         onChangeFormattedText={handleChangeFormattedText}
         ref={phoneInput}
+        containerStyle={{ 
+          // backgroundColor: 'black',
+          borderColor: props.error === undefined ? COLORS.gray : COLORS.alert,
+          borderWidth: 1,
+          borderRadius: 10,
+          width: '100%',
+        }}
+        textContainerStyle={{
+          backgroundColor: COLORS.white,
+          borderRadius: 10,
+        }}
+        textInputStyle={{
+          color: props.error === undefined ? COLORS.black : COLORS.alert,
+        }}
       />
       <ErrorText>
         {props.error === FieldErrors.empty && 'Este campo é obrigatório'}
@@ -114,32 +129,30 @@ export const DateField = (props: FieldProps) => {
   return (
     <View>
       <SubText status={props.error} >Data de nascimento</SubText>
-      <View style={{padding:10}}>
-        <DatePicker
-          style={{width: '100%'}}
-          date={props.value}
-          mode="date"
-          placeholder="Selecione uma data"
-          format="YYYY-MM-DD"
-          minDate={minDate}
-          maxDate={date}
-          confirmBtnText="Confirmar"
-          cancelBtnText="Cancelar"
-          useNativeDriver={false}
-          showIcon={false}
-          customStyles={{
-            dateInput: {
-              padding: 10,
-              border: 1,
-              borderRadius: 10,
-              borderColor: props.error === undefined ? 'black' : 'red',
-            },
-          }}
-          onDateChange={value => {
-            props.onChangeValue(value);
-          }}
-        />
-      </View>
+      <DatePicker
+        style={{width: '100%', height: 55, justifyContent: 'center',}}
+        date={props.value}
+        mode="date"
+        placeholder="Selecione uma data"
+        format="YYYY-MM-DD"
+        minDate={minDate}
+        maxDate={date}
+        confirmBtnText="Confirmar"
+        cancelBtnText="Cancelar"
+        useNativeDriver={false}
+        showIcon={false}
+        customStyles={{
+          dateInput: {
+            border: 1,
+            borderRadius: 10,
+            height: 50,
+            borderColor: props.error === undefined ? COLORS.gray : COLORS.alert,
+          },
+        }}
+        onDateChange={value => {
+          props.onChangeValue(value);
+        }}
+      />
       <ErrorText>
         {props.error === FieldErrors.empty && 'Este campo é obrigatório'}
         {!props.error && ' '}
@@ -171,15 +184,10 @@ export const UserRoleField = (props: FieldProps) => {
           backgroundColor: "white",
           alignSelf: 'center',
         }}
-        containerStyle={{
-          padding: 10,
-        }}
         style={{
           borderRadius: 10,
-          borderColor: props.error === undefined ? 'black' : 'red',
+          borderColor: props.error === undefined ? COLORS.gray : COLORS.alert,
         }}
-        // onChangeValue={props.onChangeValue}
-        // onChangeValue={(value) => console.log("öi",value)}
       />
       <ErrorText>
         {props.error === FieldErrors.empty && 'Este campo é obrigatório'}

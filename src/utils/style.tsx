@@ -15,7 +15,7 @@ export const FieldsCell = styled.View`
   padding-top: 100px;
 `;
 export const TextBox = styled.TextInput`
-  padding: 10px;
+  padding: 16px;
   border: 1px;
   border-radius: 10px;
   border-color: ${(props) => props.status === undefined ? COLORS.gray : COLORS.alert};
