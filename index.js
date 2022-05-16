@@ -4,26 +4,14 @@
 
 import { LoginPage } from './src/login';
 import { HomePage } from './src/home';
+import { DetailsPage } from './src/details';
 import React from 'react';
 import { Navigation } from 'react-native-navigation';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { addApollo } from './src/components/apollo-service';
 
-const client = new ApolloClient({
-  uri: 'https://tq-template-server-sample.herokuapp.com/graphql',
-  cache: new InMemoryCache()
-});
-Navigation.registerComponent('Login', () => (props) =>
-  <ApolloProvider client={client}>
-    <LoginPage {...props} />
-  </ApolloProvider>,
-  () => LoginPage
-);
-Navigation.registerComponent('Home', () => (props) =>
-  <ApolloProvider client={client}>
-    <HomePage {...props} />
-  </ApolloProvider>,
-  () => HomePage
-);
+Navigation.registerComponent('Login', () => addApollo(LoginPage));
+Navigation.registerComponent('Home', () => addApollo(HomePage));
+Navigation.registerComponent('UserDetails', () => addApollo(DetailsPage));
 
 Navigation.events().registerAppLaunchedListener(async () => {
   Navigation.setRoot({

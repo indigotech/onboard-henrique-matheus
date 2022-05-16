@@ -5,6 +5,7 @@ import { getUserToken } from './utils/cache';
 import { MainContainer } from './utils/style';
 import { useUserList } from './utils/user-service';
 import styled from 'styled-components/native';
+import { Navigation } from 'react-native-navigation';
 
 const ClientsPerLoad = 20;
 
@@ -40,7 +41,23 @@ export const HomePage = (props) => {
           <FlatList
             data={clientListDisplayed}
             renderItem={({ item }) => (
-              <ClientCard client={item}/>
+              <ClientCard client={item} onClientTap={() => {
+                Navigation.push(props.componentId, {
+                  component: {
+                    name: 'UserDetails',
+                    options: {
+                      topBar: {
+                        title: {
+                          text: 'UserDetails'
+                        }
+                      }
+                    },
+                    passProps: {
+                      id: item.id,
+                    }
+                  }
+                });
+              }}/>
             )}
             ListFooterComponent={() => (
               <Button title="Carregar mais" onPress={() => setOffset(offset + ClientsPerLoad)}/>
