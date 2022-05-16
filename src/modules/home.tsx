@@ -19,7 +19,7 @@ export const HomePage = props => {
 
 
   useEffect(() => {
-    const loadUserToken = async () => {
+    const loadUserToken = () => {
       getClientList();
     };
     loadUserToken();

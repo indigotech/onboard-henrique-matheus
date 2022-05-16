@@ -1,17 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import {View} from 'react-native';
-import { Background, MainText, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from '../utils/style';
+import { Background, ButtonText, ErrorText, LoginButton, TextBox } from '../utils/style';
 import {validateEmail, validateEmptyString} from '../data/string-validation';
 import {LoadingLayer} from '../components/loading-layer';
 import {FieldErrors} from '../data/errors';
 import { EmailField, NameField, PhoneField, DateField, UserRoleField } from '../components/form-fields';
-import { emptyUser, emptyUserErrors, useAddUser, UserErrorInterface, UserInterface, UserRole } from '../data/user-service';
+import { useAddUser, UserErrorInterface, UserInterface, UserRole } from '../data/user-service';
 import { getUserToken } from '../utils/cache';
 
 export const AddUserPage = props => {
 
-  const [user, setUser] = useState<UserInterface>(emptyUser);
-  const [error, setError] = useState<UserErrorInterface>(emptyUserErrors);
+  const [user, setUser] = useState<UserInterface>();
+  const [error, setError] = useState<UserErrorInterface>();
   const [role, setRole] = useState<UserRole>();
   const [addUserError, setAddUserError] = useState<string>('');
 

@@ -9,23 +9,20 @@ export enum UserRole {
 }
 
 export interface UserInterface{
-  email: string | undefined,
-  name: string | undefined,
-  phone: string | undefined,
-  birthDate: string | undefined,
-  role: UserRole | undefined
+  email?: string,
+  name?: string,
+  phone?: string,
+  birthDate?: string,
+  role?: UserRole
 }
 
 export interface UserErrorInterface{
-  email: FieldErrors | undefined,
-  name: FieldErrors | undefined,
-  phone: FieldErrors | undefined,
-  birthDate: FieldErrors | undefined,
-  role: FieldErrors | undefined
+  email?: FieldErrors,
+  name?: FieldErrors,
+  phone?: FieldErrors,
+  birthDate?: FieldErrors,
+  role?: FieldErrors
 }
-
-export const emptyUser:UserInterface = {name: undefined, birthDate: undefined, email: undefined, role: undefined, phone: undefined};
-export const emptyUserErrors:UserErrorInterface = {name: undefined, birthDate: undefined, email: undefined, role: undefined, phone: undefined};
 
 const GET_CLIENTS_LIST = gql`
   query($offset: Int!, $limit: Int!){
