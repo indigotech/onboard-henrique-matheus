@@ -3,38 +3,7 @@ import { gql, useLazyQuery, useMutation } from '@apollo/client';
 import { UserRoleField } from '../components/form-fields';
 import { FieldErrors } from './errors';
 import { navigateToHome, returnPage } from './navigation-service';
-
-export enum UserRole {
-  admin = 'admin',
-  user = 'user',
-}
-
-export interface UserInterface{
-  email?: string,
-  name?: string,
-  phone?: string,
-  birthDate?: string,
-  role?: UserRole
-}
-
-export interface UserErrorInterface{
-  email?: FieldErrors,
-  name?: FieldErrors,
-  phone?: FieldErrors,
-  birthDate?: FieldErrors,
-  role?: FieldErrors
-}
-
-const GET_CLIENTS_LIST = gql`
-  query($offset: Int!, $limit: Int!){
-    users(pageInfo: {offset: $offset, limit: $limit}){
-      nodes{
-        name
-        email
-      }
-    },
-  }
-`;
+import { ADD_USER, GET_CLIENTS_LIST } from './user-query';
 
 export const useUserList = (offset, limit) => {
 
@@ -58,19 +27,6 @@ export const useUserList = (offset, limit) => {
   return { loading, error, clientList }
 
 }
-
-const ADD_USER = gql`
-  mutation($user: UserInputType!){
-    createUser(data: $user){
-      name
-      email
-      birthDate
-      id
-      phone
-      role
-    },
-  }
-`;
 
 export const useAddUser = () => {
 

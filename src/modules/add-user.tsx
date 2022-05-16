@@ -5,8 +5,9 @@ import {validateEmail, validateEmptyString} from '../data/string-validation';
 import {LoadingLayer} from '../components/loading-layer';
 import {FieldErrors} from '../data/errors';
 import { EmailField, NameField, PhoneField, DateField, UserRoleField } from '../components/form-fields';
-import { useAddUser, UserErrorInterface, UserInterface, UserRole } from '../data/user-service';
+import { useAddUser } from '../data/user-service';
 import { getUserToken } from '../utils/cache';
+import { UserErrorInterface, UserInterface, UserRole } from '../data/user.interface'
 
 export const AddUserPage = props => {
 
