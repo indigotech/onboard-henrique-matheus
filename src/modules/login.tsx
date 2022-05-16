@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, {useState, useEffect} from 'react';
 import { View } from 'react-native';
 import { Background, H1, FieldsCell, SubText, ButtonText, ErrorText, LoginButton, TextBox } from '../utils/style';
