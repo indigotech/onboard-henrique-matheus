@@ -1,5 +1,5 @@
 import React from "react";
-import { ErrorText } from "./style";
+import { ErrorText } from "../utils/style";
 import { Text } from 'react-native';
 
 export enum FieldErrors {
