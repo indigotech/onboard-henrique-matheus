@@ -14,16 +14,8 @@ const ClientsPerLoad = 20;
 export const HomePage = props => {
 
   const [offset, setOffset] = useState(0);
-  const { loading, error, clientList, getClientList } = useUserList(offset, ClientsPerLoad);
+  const { loading, error, clientList } = useUserList(offset, ClientsPerLoad);
   const [ clientListDisplayed, setClientListDisplayed] = useState<any[]>([]);
-
-
-  useEffect(() => {
-    const loadUserToken = () => {
-      getClientList();
-    };
-    loadUserToken();
-  }, []);
 
   useEffect(() => {
     if (clientList) {

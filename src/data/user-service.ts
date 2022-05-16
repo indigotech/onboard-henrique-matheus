@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { gql, useLazyQuery, useMutation } from '@apollo/client';
 import { UserRoleField } from '../components/form-fields';
 import { FieldErrors } from './errors';
@@ -38,16 +39,23 @@ const GET_CLIENTS_LIST = gql`
 export const useUserList = (offset, limit) => {
 
   const [getClientList,resp] = useLazyQuery(GET_CLIENTS_LIST, {
-      variables: {
-        offset: offset, limit: limit
-      },
-    });
+    variables: {
+      offset: offset, limit: limit
+    },
+  });
+
+  useEffect(() => {
+    const loadUserToken = () => {
+      getClientList();
+    };
+    loadUserToken();
+  }, []);
 
   const loading = resp.loading
   const error = resp.error?.message;
   const clientList = resp.data?.users.nodes;
 
-  return { loading, error, clientList, getClientList }
+  return { loading, error, clientList }
 
 }
 
